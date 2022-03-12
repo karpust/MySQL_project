@@ -6,9 +6,9 @@ CREATE TABLE catalogs (
                           UNIQUE unique_name(name(10))
 ) COMMENT = 'Разделы интернет-магазина';
 
-# SERIAL это псевдотип для BIGINT
-# SERIAL == BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE
-# UNSIGNED поле хранит только положительные значения
+-- SERIAL это псевдотип для BIGINT
+-- SERIAL == BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE
+-- UNSIGNED поле хранит только положительные значения
 
 INSERT INTO catalogs VALUES
   (DEFAULT, 'Процессоры'),
