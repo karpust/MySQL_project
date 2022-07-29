@@ -1,4 +1,7 @@
+drop database if exists shop;
+create database shop;
 use shop;
+
 DROP TABLE IF EXISTS catalogs;
 CREATE TABLE catalogs (
                           id SERIAL PRIMARY KEY,
@@ -95,3 +98,101 @@ CREATE TABLE storehouses_products (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) COMMENT = 'Запасы на складе';
+
+
+/* 1. Создайте таблицу logs типа Archive. Пусть при каждом создании записи в таблицах users,
+catalogs и products в таблицу logs помещается время и дата создания записи, название таблицы,
+идентификатор первичного ключа и содержимое поля name. */
+
+DROP TABLE IF EXISTS logs;
+CREATE TABLE logs (
+  id SERIAL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  item_id BIGINT,
+  table_name VARCHAR(50),
+  name VARCHAR(255)
+) COMMENT = 'Журнал' ENGINE=Archive;
+
+
+DROP TRIGGER IF EXISTS check_users;
+DELIMITER //
+CREATE TRIGGER check_users AFTER INSERT ON users
+    FOR EACH ROW
+    BEGIN
+        DECLARE table_name VARCHAR(50) DEFAULT 'users';
+        SELECT id, name INTO @item_id, @name FROM users ORDER BY id DESC LIMIT 1;
+        INSERT INTO logs (`table_name`, `item_id`, `name`)
+        VALUES (table_name, @item_id, @name);
+    END//
+
+
+DROP TRIGGER IF EXISTS check_catalogs;
+DELIMITER //
+CREATE TRIGGER check_catalogs AFTER INSERT ON catalogs
+    FOR EACH ROW
+    BEGIN
+        SELECT id, name INTO @item_id, @name FROM catalogs ORDER BY id DESC LIMIT 1;
+        SET @table_name = 'catalogs';
+        INSERT INTO logs (`table_name`, `item_id`, `name`)
+        VALUES (@table_name, @item_id, @name);
+    END//
+
+
+DROP TRIGGER IF EXISTS check_products;
+DELIMITER //
+CREATE TRIGGER check_products AFTER INSERT ON products
+    FOR EACH ROW
+    BEGIN
+        SELECT id, name INTO @item_id, @name FROM products ORDER BY id DESC LIMIT 1;
+        SET @table_name = 'products';
+        INSERT INTO logs (`table_name`, `item_id`, `name`)
+        VALUES (@table_name, @item_id, @name);
+    END//
+
+
+INSERT INTO users (name, birthday_at) VALUES ('Максим', '1991-01-11');
+INSERT INTO users (name, birthday_at) VALUES ('Федор', '1991-01-11');
+INSERT INTO users (name, birthday_at) VALUES ('Василий', '1991-01-11');
+INSERT INTO catalogs (name) VALUES ('Мебель');
+INSERT INTO catalogs (name) VALUES ('Сантехника');
+INSERT INTO catalogs (name) VALUES ('Посуда');
+INSERT INTO products (name, desription, price, catalog_id) VALUES ('Intel', 'мощный процессор', 20000, 1);
+INSERT INTO products (name, desription, price, catalog_id) VALUES ('AMD', 'быстрый процессор', 15000, 1);
+
+
+/* 2. (по желанию) Создайте SQL-запрос, который помещает в таблицу users миллион записей. */
+DROP TABLE IF EXISTS million;
+CREATE TABLE million (
+  title CHAR(5) NOT NULL
+);
+
+DROP TABLE IF EXISTS fill_table;
+CREATE TABLE fill_table (
+  title CHAR(5) NOT NULL
+);
+
+DROP PROCEDURE IF EXISTS create_100;
+DELIMITER //
+CREATE PROCEDURE create_100()
+BEGIN
+  DECLARE n INT DEFAULT 0;
+  WHILE n < 100 DO
+    INSERT INTO fill_table VALUES ('abcde');
+    SET n = n + 1;
+  END WHILE;
+END//
+DELIMITER ;
+
+CALL create_100();
+
+INSERT INTO million
+SELECT t.title FROM fill_table AS t, fill_table AS e, fill_table AS s;
+
+DROP TABLE IF EXISTS fill_table;
+SELECT * FROM `million`;
+
+SELECT p.name, p.price, c.name FROM catalogs AS c JOIN products AS p ON c.id = p.catalog_id;
+
+SELECT * FROM products JOIN catalogs c on products.catalog_id = c.id;
+
+SELECT p.name, p.price, c.name FROM catalogs AS c JOIN products AS p ON c.id = p.catalog_id;

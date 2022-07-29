@@ -16,10 +16,10 @@ CREATE TABLE users (
 
 DROP TABLE IF EXISTS `profiles`;
 CREATE TABLE `profiles` (
-	user_id BIGINT UNSIGNED NOT NULL UNIQUE,
+	user_id BIGINT UNSIGNED NOT NULL PRIMARY KEY,
     gender CHAR(1),
     birthday DATE,
-	photo_id BIGINT UNSIGNED NULL,
+	photo_id BIGINT UNSIGNED NOT NULL,
     created_at DATETIME DEFAULT NOW(),
     hometown VARCHAR(100)
 	
@@ -31,6 +31,7 @@ ALTER TABLE `profiles` ADD CONSTRAINT fk_user_id
     ON UPDATE CASCADE -- (значение по умолчанию)
     ON DELETE RESTRICT; -- (значение по умолчанию)
 
+# 1 to M
 DROP TABLE IF EXISTS messages;
 CREATE TABLE messages (
 	id SERIAL, -- SERIAL = BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE
@@ -52,11 +53,14 @@ CREATE TABLE friend_requests (
     -- `status` TINYINT(1) UNSIGNED, -- в этом случае в коде хранили бы цифирный enum (0, 1, 2, 3...)
 	requested_at DATETIME DEFAULT NOW(),
 	updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP, -- можно будет даже не упоминать это поле при обновлении
-	
+
+	# это составной pk, чтобы не отправить два раза одному челу:
     PRIMARY KEY (initiator_user_id, target_user_id),
     FOREIGN KEY (initiator_user_id) REFERENCES users(id),
-    FOREIGN KEY (target_user_id) REFERENCES users(id)-- ,
-    -- CHECK (initiator_user_id <> target_user_id)
+    FOREIGN KEY (target_user_id) REFERENCES users(id),
+
+    # чтобы пользователь сам себе не отправил запрос в друзья:
+    CHECK (initiator_user_id != target_user_id)
 );
 -- чтобы пользователь сам себе не отправил запрос в друзья
 -- ALTER TABLE friend_requests 
@@ -67,17 +71,20 @@ CREATE TABLE communities(
 	id SERIAL,
 	name VARCHAR(150),
 	admin_user_id BIGINT UNSIGNED NOT NULL,
-	
-	INDEX communities_name_idx(name), -- индексу можно давать свое имя (communities_name_idx)
+
+	# индексу можно давать свое имя:
+	INDEX communities_name_idx(name),
 	foreign key (admin_user_id) references users(id)
 );
 
+# M to M
 DROP TABLE IF EXISTS users_communities;
 CREATE TABLE users_communities(
 	user_id BIGINT UNSIGNED NOT NULL,
 	community_id BIGINT UNSIGNED NOT NULL,
-  
-	PRIMARY KEY (user_id, community_id), -- чтобы не было 2 записей о пользователе и сообществе
+
+    # чтобы не было 2 записей о пользователе и сообществе:
+	PRIMARY KEY (user_id, community_id),
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (community_id) REFERENCES communities(id)
 );
@@ -85,7 +92,9 @@ CREATE TABLE users_communities(
 DROP TABLE IF EXISTS media_types;
 CREATE TABLE media_types(
 	id SERIAL,
-    name VARCHAR(255), -- записей мало, поэтому в индексе нет необходимости
+
+	# записей мало, поэтому в индексе нет необходимости:
+    name VARCHAR(255),
     created_at DATETIME DEFAULT NOW(),
     updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP
 );
