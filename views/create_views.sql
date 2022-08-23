@@ -5,9 +5,13 @@ select hour('2009-05-18 15:45:57.005678')>='14' and '16'>=hour('2009-05-18 15:45
 select hour(TIME('2009-05-18 15:45:57.005678'));
 select dayname(TIME('2009-05-18 15:45:57.005678'));
 
-select hour(timediff('2009-05-18 15:45:57.005678', '2009-05-16 15:45:57.005678')) = 48;
+select hour(timediff('2009-05-18 15:45:57.005678', '2009-05-16 18:45:57.005678'));
+select  timestampdiff(DAY, '2009-05-18 15:45:57.005678', '2009-05-16 15:45:57.005678') ;
+select hour(timediff('2009-05-16 18:45:57.005678', '2009-05-18 15:45:57.005678'));
+select timestampdiff(hour, '2009-05-16 18:45:57.005678', '2009-05-18 15:45:57.005678');
+
 select DATEDIFF('2009-05-18 14:45:57.005678', '2009-05-16 15:45:57.005678') = 2;
-select minute(TIMEDIFF('2009-05-18 14:45:57.005678', '2009-05-16 15:45:57.005678'))= 2;
+select  minute(TIMEDIFF('2009-05-18 14:45:57.005678', '2009-05-16 14:45:57.005678'))= 2;
 select TIMEDIFF('2009-05-18 14:45:57.005678', '2009-05-16 15:45:57.005678');
 select DATEDIFF('2009-05-18 14:45:57.005678', '2009-05-16 15:45:57.005678');
 select minute(TIMEDIFF('2009-05-18 14:45:57.005678', '2009-05-16 15:45:57.005678'));
@@ -129,90 +133,74 @@ DELIMITER ;
    чтобы у одной группы или препода не было одновременно уроков(разница в 5 часов)
    */
 DELIMITER //
-DROP PROCEDURE IF EXISTS schedule_fill_sp//
-CREATE PROCEDURE schedule_fill_sp(p_date DATETIME, p_teacher_id  bigint, p_group_id bigint,
-p_lesson_number tinyint, p_course_id bigint)
-    BEGIN
-        DECLARE `msg` VARCHAR(100);
+DROP TRIGGER IF EXISTS schedule_check_before_insert//
+CREATE TRIGGER schedule_check_before_insert BEFORE INSERT ON schedule
+    FOR EACH ROW
+BEGIN
+    IF exists(select 1 from schedule where group_id = new.group_id
+                                       and course_id = new.course_id
+                                       and lesson_number = new.lesson_number) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! The schedule already has this lesson of this course for the specified group';
 
-        IF
-            -- каждый урок курса для группы уникален:
-            not exists(select 1 from schedule where group_id = p_group_id and course_id = p_course_id
-                                                and lesson_number = p_lesson_number)
+    ELSEIF exists(select 1 from schedule where ABS(TIMESTAMPDIFF(hour, new.date, date)) < 5 and
+            teacher_id = new.teacher_id) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! The next lesson of the teacher can begin no earlier than 5 hours from the beginning of the previous one';
 
-                and
-            -- у преподавателя в одно время идет только один урок и
-            -- следующий может начаться не раньше чем через 5 часов:
-            not exists(select 1 from schedule where hour(TIMEDIFF(p_date, date)) < 5 and
-                                                    teacher_id = p_teacher_id)
-                and
+    ELSEIF exists(select 1 from schedule where ABS(TIMESTAMPDIFF(day, new.date, date)) < 2 and
+            group_id = new.group_id) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! The next group lesson can start no earlier than 48 hours later';
 
-            -- у группы в одно время идет только один урок и
-            -- следующий может начаться не раньше чем через 48 часов:
-            not exists(select 1 from schedule where DATEDIFF(p_date, date) < 2 and
-                                                    group_id = p_group_id)
-                and
+    ELSEIF not exists(select 1 from courses_teachers where course_id = new.course_id
+                                                       and teacher_id = new.teacher_id) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! This instructor does not teach the specified course';
 
-            -- преподаватель знает курс, который ведет:
-            exists(select 1 from courses_teachers where course_id = p_course_id
-                                                    and teacher_id = p_teacher_id)
-                and
+    ELSEIF not exists (select 1 from courses_by_group where course_id = new.course_id
+                                                        and group_id = new.group_id) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! The group does not have such a course in the program and specialization';
 
-            -- у группы есть такой курс в программе или в специализации:
-           (exists (select 1 from edu_groups eg
-               join programms p on eg.programm_id = p.id
-               join programms_courses pc on p.id = pc.programm_id
-               join courses c on pc.course_id = c.id where eg.id = p_group_id and course_id = p_course_id) or
-           exists(select 1 from  edu_groups eg2
-               join specializations s on eg2.special_id = s.id
-               join specializations_courses sc on s.id = sc.spec_id
-               join courses c2 on sc.course_id = c2.id where eg2.id = p_group_id and c2.id = p_course_id))
-                and
+    ELSEIF not exists(select 1 from lessons where number = new.lesson_number
+                                              and course_id = new.course_id) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! There is no lesson with this number in the course';
 
-           -- у курса есть такой урок:
-           exists(select 1 from lessons where number = p_lesson_number and course_id = p_course_id)
-                and
+    ELSEIF exists(select 1 from schedule where course_id = new.course_id and group_id = new.group_id)
+               and not exists(select 1 from schedule where (select max(lesson_number)
+                                                from schedule where course_id = new.course_id
+                                                and group_id = new.group_id) = new.lesson_number - 1 ) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! The next lesson of the course must have next number. ';
 
-           -- если в расписании были уроки курса у группы, то добавить можно следующий по номеру,
-           -- или если это начало курса, то номер урока должен быть 1:
-           (exists(select 1 from schedule where (select max(lesson_number)
-                                                from schedule where course_id = p_course_id
-                                                and group_id = p_group_id) = p_lesson_number - 1) or
-           (not exists(select 1 from schedule where course_id = p_course_id and group_id = p_group_id) and
-                                                   p_lesson_number = 1))
-                and
+    ELSEIF not exists(select 1 from schedule where course_id = new.course_id and
+                                                   group_id = new.group_id) and new.lesson_number > 1 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! If the course has just begun, then lesson should be No. 1 ';
 
-           -- дата урока 1 не позже даты урока 2 и
-           hour(p_date)<= 20 and hour(p_date) >= 10
-           -- время начала уроков не ранее 10:00 и не позднее 20:00:
-#            (exists(select 1 from schedule where group_id = p_group_id and course_id = p_course_id and
-#             date < p_date) and
-#             (not exists(select 1 from schedule where group_id = p_group_id and course_id = p_course_id)
-#                ))
+    ELSEIF hour(new.date) > 20 or hour(new.date) < 10 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! Lessons should start no earlier than 10 am and no later than 8 pm';
 
-        THEN INSERT INTO schedule(date, teacher_id, group_id, lesson_number, course_id)
-                 values(p_date, p_teacher_id, p_group_id, p_lesson_number, p_course_id);
-            SET `msg` := 'Согласованность данных не нарушена';
-        ELSE
-            SET `msg` := CONCAT('Ошибка добавления данных. ',
-                'Строка: ', p_date, ' ', p_teacher_id, ' ', p_group_id, ' ', p_lesson_number, ' ', p_course_id);
-        END IF;
-        SELECT `msg`;
-    END//
+    ELSEIF exists(select 1 from schedule where group_id = new.group_id and course_id = new.course_id and
+                                               date > new.date) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! The next lesson of the course for the group cannot be earlier than the previous one';
+
+    ELSEIF not exists(select 1 from courses_mentors where mentor_id = new.mentor_id and course_id = new.course_id) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! The mentor does not teach this course';
+
+    END IF;
+END //
 DELIMITER ;
 
 
--- для составления расписания создам две вью:
--- вью все курсы препода:
-CREATE OR REPLACE VIEW `courses_by_teacher` AS
-    SELECT
-        t.user_id AS teacher_id,
-        concat((select group_concat(c.id) from courses c
-            join courses_teachers ct on c.id = ct.course_id
-            where ct.teacher_id = t.user_id)) as courses_id
-    FROM teachers t;
+SHOW TRIGGERS;
 
-SELECT * FROM courses_by_teacher;
+
+-- для составления расписания создам вью:
+-- вью все курсы препода:
+# CREATE OR REPLACE VIEW `courses_by_teacher` AS
+#     SELECT
+#         t.user_id AS teacher_id,
+#         concat((select group_concat(c.id) from courses c
+#             join courses_teachers ct on c.id = ct.course_id
+#             where ct.teacher_id = t.user_id)) as courses_id
+#     FROM teachers t;
+#
+# SELECT * FROM courses_by_teacher;
 
 -- вью все курсы группы:
 CREATE OR REPLACE VIEW courses_by_group AS
@@ -253,39 +241,29 @@ SELECT * FROM courses_by_group;
 
 
 
--- хп заполняет students_practicals в соответствии сo schedule :
+-- триггер заполнения students_practicals в соответствии сo schedule :
 DELIMITER //
-DROP PROCEDURE IF EXISTS students_practicals_fill_sp//
-CREATE PROCEDURE students_practicals_fill_sp(p_student_id bigint, p_practical_id bigint,
-p_date datetime, p_content varchar(1024))
-    BEGIN
-        DECLARE `msg` VARCHAR(100);
-        IF
-            -- у студента есть урок, которому соответствует пз:
-            exists (select 1 from students s
+DROP TRIGGER IF EXISTS students_practicals_check_before_insert//
+CREATE TRIGGER students_practicals_check_before_insert BEFORE INSERT ON students_practicals
+    FOR EACH ROW
+BEGIN
+    -- у студента нет урока, которому соответствует пз:
+    IF NOT EXISTS (select 1 from students s
             join edu_groups eg on s.group_id = eg.id
             join courses_by_group cbg on s.group_id = cbg.group_id
-            join courses c on cbg.course_id = c.id
-            join lessons l on c.id = l.course_id
+            join lessons l on cbg.course_id = l.course_id
             join practicals p on l.id = p.lesson_id
-            where lesson_id = p_practical_id and s.user_id = p_student_id)
-            AND
+            where lesson_id = new.practical_id and s.user_id = new.student_id) THEN
+                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! Student does not have a lesson that corresponds to this practical task';
 
-           -- задание можно сдать не позднее чем через 2 недели после начала урока
-           -- и не раньше конца урока:
-           exists(select 1 from lessons l
+    -- задание можно сдать не позднее чем через 2 недели после начала урока
+    -- и не раньше конца урока:
+    ELSEIF not exists(select 1 from lessons l
                join schedule s on l.number = s.lesson_number and l.course_id = s.course_id
-               where l.id = p_practical_id and timestampdiff(day, s.date, p_date) <= 14
-                 and timestampdiff(hour, s.date, p_date) >= 2)
-
-            THEN INSERT INTO students_practicals(student_id, practical_id, date, content)
-                 values(p_student_id, p_practical_id, p_date, p_content);
-            SET `msg` := 'Данные согласованы';
-        ELSE
-            SET `msg` := CONCAT('Ошибка добавления данных. ', 'Строка: ', p_student_id, ' ',
-                p_practical_id, ' ', p_date, ' ', p_content);
+               where l.id = new.practical_id and timestampdiff(day, s.date, new.date) <= 14
+                 and timestampdiff(hour, s.date, new.date) >= 2) THEN
+                     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! Practical task must be complete no later than 2 weeks after start and not before the end of lesson';
         END IF;
-        SELECT `msg`;
     END//
 DELIMITER ;
 
@@ -302,40 +280,33 @@ join courses_by_group cbg on s.group_id = cbg.group_id
 join lessons l on cbg.course_id = l.course_id
 join schedule sc on l.course_id = sc.course_id and l.number = sc.lesson_number and eg.id = sc.group_id;
 
-select * from students_lessons_date;
+# select * from students_lessons_date;
 
 
--- хп заполняет teachers_practicals и проверяет что пз соотв курсу на кот учится студент и кот ведет препод
+-- триггер для заполнения teachers_practicals.
+-- проверяет что пз соотв курсу на кот учится студент и кот ведет препод
 -- а также в teachers_practicals должны соотв students_practicals
 DELIMITER //
-DROP PROCEDURE IF EXISTS teachers_practicals_fill_sp//
-CREATE PROCEDURE teachers_practicals_fill_sp(p_teacher_id bigint, p_student_id bigint,
-p_practical_id bigint, p_rating tinyint(1))
+DROP TRIGGER IF EXISTS teachers_practicals_check_before_insert//
+CREATE TRIGGER teachers_practicals_check_before_insert BEFORE INSERT ON teachers_practicals
+FOR EACH ROW
     BEGIN
-        DECLARE `msg` VARCHAR(100);
-        IF
-            -- задание выполнено:
-            exists(select 1 from students_practicals sp
-                where student_id = p_student_id and practical_id = p_practical_id)
-                and
+        -- задание не выполнено:
+        IF NOT exists(select 1 from students_practicals sp
+                where student_id = new.student_id and practical_id = new.practical_id) THEN
+                    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! Practical task not complete.';
 
-            -- студент учится у препода:
-            exists (select 1 from students s
+        -- студент не учится у этого препода:
+        ELSEIF NOT exists (select 1 from students s
             join edu_groups eg on s.group_id = eg.id
             join courses_by_group cbg on eg.id = cbg.group_id
             join lessons l on cbg.course_id = l.course_id
             join schedule sc on l.course_id = sc.course_id and eg.id = sc.group_id
-                where sc.teacher_id = p_teacher_id and s.user_id = p_student_id
-                  and l.id = p_practical_id)
+                where sc.teacher_id = new.teacher_id and s.user_id = new.student_id
+                  and l.id = new.practical_id) THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error!  Student is not studying with this teacher.';
 
-            THEN INSERT INTO teachers_practicals(teacher_id, student_id, practical_id, rating)
-                 values(p_teacher_id, p_student_id, p_practical_id, p_rating);
-            SET `msg` := 'Данные согласованы';
-        ELSE
-            SET `msg` := CONCAT('Ошибка добавления данных. ', 'Строка: ', p_teacher_id, ' ',
-                p_student_id, ' ', p_practical_id, ' ', p_rating);
         END IF;
-        SELECT `msg`;
     END//
 DELIMITER ;
 
@@ -354,59 +325,32 @@ from students s
     join schedule sc on l.course_id = sc.course_id and l.number = sc.lesson_number and eg.id = sc.group_id
     join teachers t on sc.teacher_id = t.user_id;
 
-select * from teacher_student_practical;
+# select * from teacher_student_practical;
 
 
--- добавь менторов в расписание!!!
+-- триггер на сообщения, нельзя отправлять себе
+DELIMITER //
+DROP TRIGGER IF EXISTS messages_check_before_insert//
+CREATE TRIGGER messages_check_before_insert BEFORE INSERT ON messages
+    FOR EACH ROW
+BEGIN
+    IF new.from_id = new.to_id THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! User can not send messages for yourself';
+    END IF;
+END //
+DELIMITER ;
+
+
+-- --------------------------------------------------------------------------------------------------
+
+
 
 -- reviews в соотв с курсом кот прошел студент
 -- хп заполняет teacher_ratings проверяя что студент отучился на курсе кот вел препод
 -- хп заполняет mentor_ratings проверяя что студент отучился на курсе на кот был этот ментор
-
-
 -- хп заполняет табл скидки, проверяет что дата до старта программы и проверяет начало не в одно время
 
 /* только после этого данные в базе будут согласованными и можно будет делать вьюшки */
-
--- триггер если время сдачи пз вышло - написать
-
-
-
-
-/* отображает все не законченные курсы студента
-   студент - практика -
-   студент - курс - урок - нет практик - не смотрены видео - препод
-   */
-CREATE OR REPLACE VIEW students_debt_info
-AS
-SELECT
-u.id AS ID,
-CONCAT(u.lastname, ' ', u.firstname) AS student,
-CONCAT(
-    (SELECT GROUP_CONCAT(ps.ID) FROM
-    (SELECT DISTINCT c.id AS ID
-    FROM courses c
-    JOIN programms_courses pcn on c.id = pcn.course_id
-    JOIN programms p ON pcn.programm_id = p.id
-    JOIN edu_groups eg on p.id = eg.programm_id
-    JOIN students s on eg.id = s.group_id
-    WHERE s.user_id = u.id
-    UNION
-    (SELECT DISTINCT cn.id FROM courses cn
-    JOIN specializations_courses scn on cn.id = scn.course_id
-    JOIN specializations spec ON scn.spec_id = spec.id
-    JOIN edu_groups eg on spec.id = eg.programm_id
-    JOIN students s on eg.id = s.group_id
-    WHERE s.user_id = u.id)) AS ps)) AS courses
-#         sp.is_completed AS complete,
-#         sv.is_watched AS watched,
-#         CONCAT(u.lastname, ' ', u.firstname) AS teacher
-FROM users u;
-
-
--- видео и практика связаны с уроком,
--- у программы 4 курса
-SELECT * FROM students_debt_info;
 
 
 /* показывает студента, его группу, программу обучения, специализацию,
@@ -416,26 +360,23 @@ CREATE OR REPLACE VIEW student_info
     AS
     SELECT CONCAT(u.firstname,' ', u.lastname) AS name,
            CONCAT(g.name, '_', g.id) AS group_name,
-           CONCAT(p.id, '.', p.title) AS programm,
-           CONCAT(spec.id, '.', spec.name) AS specialization,
-
-           CONCAT((SELECT GROUP_CONCAT(cn.id SEPARATOR '; ')
-                   FROM course_names cn
-               JOIN courses c ON cn.id = c.course_name_id
-               JOIN edu_groups g ON c.group_id = g.id
-               JOIN students s ON g.id = s.group_id
-                                  WHERE s.user_id = u.id)) AS courses,
-
+           CONCAT(p.id, '. ', p.title) AS programm,
+           CONCAT(spec.id, '. ', spec.name) AS specialization,
+           CONCAT((SELECT GROUP_CONCAT(cbg.course_id SEPARATOR '; ')
+               from students s
+               join edu_groups eg on s.group_id = eg.id
+               join courses_by_group cbg on eg.id = cbg.group_id
+               where s.user_id = u.id)) AS courses,
            CONCAT((SELECT GROUP_CONCAT(CONCAT(u2.lastname, ', ', u2.firstname) SEPARATOR '; ')
                    FROM users u2
                    JOIN teachers t on u2.id = t.user_id
-                   JOIN courses c2 on t.user_id = c2.teacher_id
-                   JOIN edu_groups g2 on c2.group_id = g2.id
-                   JOIN students s2 on g2.id = s2.group_id
-                   WHERE s2.user_id = u.id)) AS teachers,
-
-           (select COUNT(s3.user_id) FROM students s3
-                                       WHERE s3.group_id = s.group_id) AS number
+                   join courses_teachers ct on t.user_id = ct.teacher_id
+                   join courses_by_group cbg on ct.course_id = cbg.course_id
+                   JOIN edu_groups eg on cbg.group_id = eg.id
+                   JOIN students s on eg.id = s.group_id
+                   WHERE s.user_id = u.id)) AS teachers,
+           (select COUNT(s1.user_id) FROM students s1
+                                       WHERE s1.group_id = g.id) AS number
     FROM users u
     JOIN students s ON u.id = s.user_id
     JOIN edu_groups g ON s.group_id = g.id
@@ -445,41 +386,65 @@ CREATE OR REPLACE VIEW student_info
 SELECT * FROM student_info;
 
 
-# триггеры:
-# проверка добавления данных в таблицы courses и edu_groups:
-# курсы должен соответствовать программе и специализации
-# программа должна соответствовать специализации
+
+
+
+/* отображает все не законченные курсы студента
+   студент - курс - урок - нет практик - препод
+   */
+CREATE OR REPLACE VIEW students_debt_info
+AS
+SELECT
+    u.id AS ID,
+    CONCAT(u.lastname, ' ', u.firstname) AS student,
+    cbg.course_id AS courses,
+    concat((SELECT GROUP_CONCAT(l2.id)
+            FROM lessons l2
+            where l2.id = l.number)) AS lesson_numbers,
+    t.user_id AS teacher
+FROM users u
+         join students s on u.id = s.user_id
+         join edu_groups eg on s.group_id = eg.id
+         join courses_by_group cbg on s.group_id = cbg.group_id
+         join courses_teachers ct on cbg.course_id = ct.course_id
+         join teachers t on ct.teacher_id = t.user_id
+         join lessons l on cbg.course_id = l.course_id
+         join practicals p on l.id = p.lesson_id
+where not exists (select 1 from students_practicals where student_id = u.id and practical_id = l.id)
+;
+
+SELECT * FROM students_debt_info;
+
 
 -- вью показывает всех преподов программы и их рейтинг
--- всех
 
 # вью показывает оценки курсу, преподавателю, ментору от студентов:
 # (курс - отзыв - препод - оценка - ментор - оценка - студент)
-CREATE OR REPLACE VIEW rating_from_students
-    AS
-    SELECT
-        s.user_id AS student_from,
-        eg.id AS by_group,
-        c.id AS to_course,
-        cr.content AS course_review,
-        t.user_id AS to_teacher,
-        tr.rating AS teacher_rating
-#         s.user_id AS to_mentor,
-#         mr.rating AS mentor_rating
-
-FROM users u
-JOIN students s on u.id = s.user_id
-JOIN edu_groups eg on s.group_id = eg.id
-JOIN courses c on eg.id = c.group_id
-JOIN course_names cn on cn.id = c.course_name_id
-JOIN reviews cr on s.user_id = cr.from_student and c.id = cr.to_course
-JOIN teacher_ratings tr on s.user_id = tr.from_student
-JOIN teachers t on tr.to_teacher = t.user_id
-JOIN mentor_ratings mr on s.user_id = mr.from_student
-JOIN students s2 on mr.to_mentor = s2.user_id
-;
-
-SELECT * FROM rating_from_students;
+# CREATE OR REPLACE VIEW rating_from_students
+#     AS
+#     SELECT
+#         s.user_id AS student_from,
+#         eg.id AS by_group,
+#         c.id AS to_course,
+#         cr.content AS course_review,
+#         t.user_id AS to_teacher,
+#         tr.rating AS teacher_rating
+# #         s.user_id AS to_mentor,
+# #         mr.rating AS mentor_rating
+#
+# FROM users u
+# JOIN students s on u.id = s.user_id
+# JOIN edu_groups eg on s.group_id = eg.id
+# JOIN courses c on eg.id = c.group_id
+# JOIN course_names cn on cn.id = c.course_name_id
+# JOIN reviews cr on s.user_id = cr.from_student and c.id = cr.to_course
+# JOIN teacher_ratings tr on s.user_id = tr.from_student
+# JOIN teachers t on tr.to_teacher = t.user_id
+# JOIN mentor_ratings mr on s.user_id = mr.from_student
+# JOIN students s2 on mr.to_mentor = s2.user_id
+# ;
+#
+# SELECT * FROM rating_from_students;
 
 
 
@@ -500,9 +465,11 @@ join edu_groups eg on s.group_id = eg.id
 join courses c on c.group_id = eg.id;
 
 
+
+
+
+
 /*-------------------------------------------------------------------------------------------------------*/
-
-
 select group_concat(distinct u.id, u.lastname order by u.id separator ', ') as user_info
 from users u;
 
@@ -564,3 +531,28 @@ select programm_id, special_id from edu_groups
         and special_id = edu_groups.special_id);
 
 
+-- ----------------------------------------------------------------------------------------------------------------
+
+-- триггер отправка сообщения от ментора при старте курса
+-- if scedule.date = current_timestamp чтобы отправить сообщение надо кудато сделать запись ...
+-- если время в расписании = сейчас, и номер урока 1, функция сравнивает даты в расписании с сегодняшней
+-- кто запускает ф-ю?
+# DROP EVENT IF EXISTS message_from_mentor_on_start;
+# DELIMITER //
+# CREATE EVENT message_from_mentor_on_start BEFORE INSERT ON messages
+#     FOR EACH ROW
+#     BEGIN
+#
+#     END //
+
+
+# DROP TRIGGER IF EXISTS check_users;
+# DELIMITER //
+# CREATE TRIGGER check_users AFTER INSERT ON users
+#     FOR EACH ROW
+#     BEGIN
+#         DECLARE table_name VARCHAR(50) DEFAULT 'users';
+#         SELECT id, name INTO @item_id, @name FROM users ORDER BY id DESC LIMIT 1;
+#         INSERT INTO logs (`table_name`, `item_id`, `name`)
+#         VALUES (table_name, @item_id, @name);
+#     END//

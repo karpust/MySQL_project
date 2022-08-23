@@ -313,7 +313,7 @@ CALL students_fill_sp('Jonatan', 'Balistreri', 89328074303,
                       '2021-01-19', 'Dolores autem incidunt aut inventore expedita amet magnam.',
                       '0eb1483788d9e63418200be319225ef1f7478c79', 'http://lorempixel.com/640/480/', 2,
                       'Asperiores iusto sit soluta dicta fuga nihil exercitationem. Excepturi alias tempore voluptas
-              eum architecto voluptates suscipit. Omnis ut repellendus eos ut repudiandae. Quisquam et et tempore.',
+              eum architecto voluptates suscipit. Omnis ut repellendus eos ut repudiandae.',
                       @trans_result);
 CALL students_fill_sp('Dawn', 'Cormier', 89786034378, 'dameon.bradtke@example.org',
                       'other', 'Latvia', 'Lake Brendenview',
@@ -354,7 +354,7 @@ CALL students_fill_sp('Hilda', 'Collins', 89703926446, 'emile23@example.org',
                       'Unde neque et expedita.', '047263c09ca3bc325508413fee3316cbae3ba9e2',
                       'http://lorempixel.com/640/480/', 3,
                       'Dolores et totam molestiae quod est quae laboriosam. Non consequatur aut sit repellendus ad
-              omnis quis. Sunt et rem minus amet quia perferendis qui. Nulla qui excepturi reiciendis et eius sunt.',
+              omnis quis. Sunt et rem minus amet quia perferendis qui.',
                       @trans_result);
 CALL students_fill_sp('Leopold', 'Nitzsche', 89705616591,
                       'mcdermott.deontae@example.com', 'female', 'Guernsey', 'Zoefurt',
@@ -383,7 +383,7 @@ CALL students_fill_sp('Lafayette', 'Stehr', 89981051455, 'cweissnat@example.net'
 exercitationem debitis.',
                       'cbdd1aef95d4c225ffacac6e58d3c95cf914c789', 'http://lorempixel.com/640/480/', 2,
                       'Quia reiciendis et culpa quis doloribus assumenda fugit dolorem. Non deleniti expedita hic dolorum
-              doloremque. Non placeat nulla cumque sapiente et nemo. Aut rerum facilis ut placeat eum est.',
+              doloremque. Non placeat nulla cumque sapiente et nemo.',
                       @trans_result);
 CALL students_fill_sp('Kade', 'Little', 89788894439, 'gillian49@example.com',
                       'male', 'Saudi Arabia', 'South Rosemarie',
@@ -442,7 +442,7 @@ CALL students_fill_sp('Domenic', 'Pfeffer', 89252886408, 'ekuhic@example.org',
                       'Autem maiores quia nobis consequatur.', 'e235f98d07766f9a86fc74d8bc45ceb1432da942',
                       'http://lorempixel.com/640/480/', 1,
                       'Provident id explicabo voluptate et dignissimos repellat suscipit. Laboriosam sed quidem quos
-              dignissimos dolores. Autem odio nobis possimus aspernatur molestiae et. Sequi totam vel eos qui et.',
+              dignissimos dolores. Autem odio nobis possimus aspernatur molestiae et.',
                       @trans_result);
 CALL students_fill_sp('Stephany', 'Jast', 89119333256, 'garrick06@example.net',
                       'other', 'Sweden', 'Davidville', '2002-10-29',
@@ -483,13 +483,13 @@ CALL students_fill_sp('Catherine', 'Marquardt', 89509213516, 'mauricio77@example
                       'd1227173be33bb5f6cd5c50c0df682beef82e026',
                       'http://lorempixel.com/640/480/', 2,
                       'Qui voluptates est non illo repellendus placeat dolorum voluptatibus. Ut voluptatibus inventore sit.
-              Delectus quisquam accusamus et eos. Architecto consequatur nemo ut similique autem enim.', @trans_result);
+              Delectus quisquam accusamus et eos. Architecto consequatur .', @trans_result);
 CALL students_fill_sp('Adell', 'Luettgen', 89817016705, 'schaden.darwin@example.com',
                       'female', 'Togo', 'Vonberg', '1995-01-24',
                       'Voluptas eos nobis aut rerum.', 'dd0116c587fca255dfbc66e9306b17f3915572a4',
                       'http://lorempixel.com/640/480/', 3,
                       'Eos minima voluptas totam voluptates aut omnis blanditiis. Quam facilis non ut quo. Temporibus placeat
-              dolore officiis nostrum magnam consequuntur quaerat. Atque corporis repellendus totam soluta bla',
+              dolore officiis nostrum magnam consequuntur quaerat',
                       @trans_result);
 CALL students_fill_sp('Jedidiah', 'Hilll', 89037108092, 'hoeger.raven@example.com',
                       'female', 'Belarus', 'West Elise',
@@ -497,14 +497,14 @@ CALL students_fill_sp('Jedidiah', 'Hilll', 89037108092, 'hoeger.raven@example.co
                       '8e7e9e1de3e359e2ea2da1fae6d6f214f2a69506',
                       'http://lorempixel.com/640/480/', 4,
                       'Perspiciatis nemo reprehenderit reiciendis doloremque. Harum aliquam provident quam aut consequatur.
-              Qui eligendi itaque omnis illo numquam. Minus adipisci quia et veniam explicabo consequatur.', @trans_result);
+              Qui eligendi itaque omnis illo numquam. Minus adipisci qui.', @trans_result);
 CALL students_fill_sp('Marie', 'Fahey', 89804449928, 'hermann.gretchen@example.com',
                       'female', 'Russian Federation', 'Port Piper',
                       '1982-04-26', 'Sapiente et numquam repudiandae.',
                       '97aa4226ec121ffb9c77cb41b4bdac6aa2e4d3fd',
                       'http://lorempixel.com/640/480/', 5,
                       'Laboriosam aperiam repellendus enim aut animi. Fugit hic dicta dolores occaecati. Voluptatem
-              explicabo deserunt sed laboriosam totam vero quo incidunt. Aliquid et laborum culpa asperiores consequatur ',
+              explicabo deserunt sed laboriosam totam vero quo incidunt. ',
                       @trans_result);
 
 
@@ -897,101 +897,82 @@ VALUES (1, 1, 1, 'Placeat quis sint quia itaque voluptas dolor.'),
        (97, 1, 29, 'Tenetur est sapiente occaecati.'),
        (98, 2, 29, 'Quaerat modi sed eos vel quae.'),
        (99, 1, 30, 'Architecto ea similique eos fuga consequatur unde et.'),
-       (100, 2, 30, 'Aut quia at iure ea sed dolorum officia.');
--- 100
+       (100, 2, 30, 'Aut quia at iure ea sed dolorum officia.'); -- 100
 
 
 -- fill table schedule:
-call schedule_fill_sp('2021-03-05 10:00:00', 45, 1, 1, 10);
-call schedule_fill_sp('2021-03-07 10:00:00', 45, 1, 2, 10);
-call schedule_fill_sp('2021-03-09 15:00:00', 45, 1, 3, 10);
-
-call schedule_fill_sp('2021-03-11 15:00:00', 37, 1, 1, 17);
-call schedule_fill_sp('2021-03-13 15:00:00', 37, 1, 2, 17);
-call schedule_fill_sp('2021-03-15 15:00:00', 37, 1, 3, 17);
-
-call schedule_fill_sp('2021-03-17 15:00:00', 46, 1, 1, 26);
-call schedule_fill_sp('2021-03-19 15:00:00', 46, 1, 2, 26);
-call schedule_fill_sp('2021-03-21 15:00:00', 46, 1, 3, 26);
-call schedule_fill_sp('2021-03-23 15:00:00', 46, 1, 4, 26);
-
-call schedule_fill_sp('2021-03-25 15:00:00', 36, 1, 1, 1);
-call schedule_fill_sp('2021-03-28 15:00:00', 36, 1, 2, 1);
-call schedule_fill_sp('2021-04-01 15:00:00', 36, 1, 3, 1);
-
-call schedule_fill_sp('2021-03-17 20:00:00', 46, 2, 1, 26);
-call schedule_fill_sp('2021-03-19 20:00:00', 46, 2, 2, 26);
-call schedule_fill_sp('2021-03-21 20:00:00', 46, 2, 3, 26);
-
-call schedule_fill_sp('2021-03-23 19:00:00', 48, 2, 1, 13);
-call schedule_fill_sp('2021-03-25 19:00:00', 48, 2, 2, 13);
-call schedule_fill_sp('2021-03-27 19:00:00', 48, 2, 3, 13);
-call schedule_fill_sp('2021-03-30 19:00:00', 48, 2, 4, 13);
-
-call schedule_fill_sp('2021-04-02 10:00:00', 49, 2, 1, 29);
-call schedule_fill_sp('2021-04-05 10:00:00', 49, 2, 2, 29);
-
-call schedule_fill_sp('2021-04-07 10:00:00', 39, 2, 1, 4);
-call schedule_fill_sp('2021-04-09 10:00:00', 39, 2, 2, 4);
-call schedule_fill_sp('2021-04-11 10:00:00', 39, 2, 3, 4);
-
-call schedule_fill_sp('2021-03-05 20:00:00', 38, 3, 1, 18);
-call schedule_fill_sp('2021-03-07 20:00:00', 38, 3, 2, 18);
-call schedule_fill_sp('2021-03-09 20:00:00', 38, 3, 3, 18);
-call schedule_fill_sp('2021-03-11 20:00:00', 38, 3, 4, 18);
-
-call schedule_fill_sp('2021-03-13 20:00:00', 42, 3, 1, 22);
-call schedule_fill_sp('2021-03-15 20:00:00', 42, 3, 2, 22);
-call schedule_fill_sp('2021-03-17 20:00:00', 42, 3, 3, 22);
-call schedule_fill_sp('2021-03-19 20:00:00', 42, 3, 4, 22);
-
-call schedule_fill_sp('2021-03-21 20:00:00', 46, 3, 1, 26);
-call schedule_fill_sp('2021-03-23 20:00:00', 46, 3, 2, 26);
-call schedule_fill_sp('2021-03-25 20:00:00', 46, 3, 3, 26);
-call schedule_fill_sp('2021-03-27 20:00:00', 46, 3, 4, 26);
-
-call schedule_fill_sp('2021-03-30 20:00:00', 40, 3, 1, 5);
-call schedule_fill_sp('2021-04-01 20:00:00', 40, 3, 2, 5);
-call schedule_fill_sp('2021-04-04 20:00:00', 40, 3, 3, 5);
-call schedule_fill_sp('2021-04-06 20:00:00', 40, 3, 4, 5);
-call schedule_fill_sp('2021-04-08 20:00:00', 40, 3, 5, 5);
-
-call schedule_fill_sp('2021-03-23 13:00:00', 48, 4, 1, 13);
-call schedule_fill_sp('2021-03-25 13:00:00', 48, 4, 2, 13);
-call schedule_fill_sp('2021-03-27 13:00:00', 48, 4, 3, 13);
-call schedule_fill_sp('2021-03-29 13:00:00', 48, 4, 4, 13);
-
-call schedule_fill_sp('2021-03-31 20:00:00', 46, 4, 1, 26);
-call schedule_fill_sp('2021-04-02 20:00:00', 46, 4, 2, 26);
-call schedule_fill_sp('2021-04-04 20:00:00', 46, 4, 3, 26);
-call schedule_fill_sp('2021-04-06 20:00:00', 46, 4, 4, 26);
-
-call schedule_fill_sp('2021-04-10 15:00:00', 49, 4, 1, 29);
-call schedule_fill_sp('2021-04-12 15:00:00', 49, 4, 2, 29);
-
-call schedule_fill_sp('2021-04-14 15:00:00', 37, 4, 1, 2);
-call schedule_fill_sp('2021-04-16 15:00:00', 37, 4, 2, 2);
-call schedule_fill_sp('2021-04-18 15:00:00', 37, 4, 3, 2);
-
-call schedule_fill_sp('2021-03-05 15:00:00', 38, 5, 1, 18);
-call schedule_fill_sp('2021-03-07 15:00:00', 38, 5, 2, 18);
-call schedule_fill_sp('2021-03-09 15:00:00', 38, 5, 3, 18);
-call schedule_fill_sp('2021-03-11 15:00:00', 38, 5, 4, 18);
-
-call schedule_fill_sp('2021-03-13 12:00:00', 42, 5, 1, 22);
-call schedule_fill_sp('2021-03-15 12:00:00', 42, 5, 2, 22);
-call schedule_fill_sp('2021-03-17 12:00:00', 42, 5, 3, 22);
-call schedule_fill_sp('2021-03-19 12:00:00', 42, 5, 4, 22);
-
-call schedule_fill_sp('2021-03-21 10:00:00', 46, 5, 1, 26);
-call schedule_fill_sp('2021-03-23 10:00:00', 46, 5, 2, 26);
-call schedule_fill_sp('2021-03-25 10:00:00', 46, 5, 3, 26);
-call schedule_fill_sp('2021-03-27 10:00:00', 46, 5, 4, 26);
-
-call schedule_fill_sp('2021-03-29 12:00:00', 38, 5, 1, 3);
-call schedule_fill_sp('2021-03-31 12:00:00', 38, 5, 2, 3);
-call schedule_fill_sp('2021-04-02 12:00:00', 38, 5, 3, 3);
-call schedule_fill_sp('2021-04-04 12:00:00', 38, 5, 4, 3);
+INSERT INTO `schedule` (date, teacher_id, group_id, lesson_number, course_id, mentor_id)
+VALUES ('2021-03-05 10:00:00', 45, 1, 1, 10, 10),
+       ('2021-03-07 10:00:00', 45, 1, 2, 10, 10),
+       ('2021-03-09 15:00:00', 45, 1, 3, 10, 10),
+       ('2021-03-11 15:00:00', 37, 1, 1, 17, 7),
+       ('2021-03-13 15:00:00', 37, 1, 2, 17, 7),
+       ('2021-03-15 15:00:00', 37, 1, 3, 17, 7),
+       ('2021-03-17 15:00:00', 46, 1, 1, 26, 6),
+       ('2021-03-19 15:00:00', 46, 1, 2, 26, 6),
+       ('2021-03-21 15:00:00', 46, 1, 3, 26, 6),
+       ('2021-03-23 15:00:00', 46, 1, 4, 26, 6),
+       ('2021-03-25 15:00:00', 36, 1, 1, 1, 1),
+       ('2021-03-28 15:00:00', 36, 1, 2, 1, 1),
+       ('2021-04-01 15:00:00', 36, 1, 3, 1, 1),
+       ('2021-03-17 20:00:00', 46, 2, 1, 26, 6),
+       ('2021-03-19 20:00:00', 46, 2, 2, 26, 6),
+       ('2021-03-21 20:00:00', 46, 2, 3, 26, 6),
+       ('2021-03-23 20:00:00', 48, 2, 1, 13, 3),
+       ('2021-03-25 20:00:00', 48, 2, 2, 13, 3),
+       ('2021-03-27 20:00:00', 48, 2, 3, 13, 3),
+       ('2021-03-30 19:00:00', 48, 2, 4, 13, 3),
+       ('2021-04-02 10:00:00', 49, 2, 1, 29, 9),
+       ('2021-04-05 10:00:00', 49, 2, 2, 29, 9),
+       ('2021-04-07 10:00:00', 39, 2, 1, 4, 4),
+       ('2021-04-09 10:00:00', 39, 2, 2, 4, 4),
+       ('2021-04-11 10:00:00', 39, 2, 3, 4, 4),
+       ('2021-03-05 20:00:00', 38, 3, 1, 18, 8),
+       ('2021-03-07 20:00:00', 38, 3, 2, 18, 8),
+       ('2021-03-09 20:00:00', 38, 3, 3, 18, 8),
+       ('2021-03-11 20:00:00', 38, 3, 4, 18, 8),
+       ('2021-03-13 20:00:00', 42, 3, 1, 22, 2),
+       ('2021-03-15 20:00:00', 42, 3, 2, 22, 2),
+       ('2021-03-17 20:00:00', 42, 3, 3, 22, 2),
+       ('2021-03-19 20:00:00', 42, 3, 4, 22, 2),
+       ('2021-03-22 15:00:00', 46, 3, 1, 26, 6),
+       ('2021-03-25 15:00:00', 46, 3, 2, 26, 6),
+       ('2021-03-27 15:00:00', 46, 3, 3, 26, 6),
+       ('2021-03-29 15:00:00', 46, 3, 4, 26, 6),
+       ('2021-03-31 20:00:00', 40, 3, 1, 5, 5),
+       ('2021-04-02 20:00:00', 40, 3, 2, 5, 5),
+       ('2021-04-04 20:00:00', 40, 3, 3, 5, 5),
+       ('2021-04-06 20:00:00', 40, 3, 4, 5, 5),
+       ('2021-04-08 20:00:00', 40, 3, 5, 5, 5),
+       ('2021-03-23 13:00:00', 48, 4, 1, 13, 3),
+       ('2021-03-25 13:00:00', 48, 4, 2, 13, 3),
+       ('2021-03-27 13:00:00', 48, 4, 3, 13, 3),
+       ('2021-03-29 13:00:00', 48, 4, 4, 13, 3),
+       ('2021-03-31 20:00:00', 46, 4, 1, 26, 6),
+       ('2021-04-02 20:00:00', 46, 4, 2, 26, 6),
+       ('2021-04-04 20:00:00', 46, 4, 3, 26, 6),
+       ('2021-04-06 20:00:00', 46, 4, 4, 26, 6),
+       ('2021-04-10 15:00:00', 49, 4, 1, 29, 9),
+       ('2021-04-12 15:00:00', 49, 4, 2, 29, 9),
+       ('2021-04-14 15:00:00', 37, 4, 1, 2, 2),
+       ('2021-04-16 15:00:00', 37, 4, 2, 2, 2),
+       ('2021-04-18 15:00:00', 37, 4, 3, 2, 2),
+       ('2021-03-05 12:00:00', 38, 5, 1, 18, 8),
+       ('2021-03-07 12:00:00', 38, 5, 2, 18, 8),
+       ('2021-03-09 12:00:00', 38, 5, 3, 18, 8),
+       ('2021-03-11 12:00:00', 38, 5, 4, 18, 8),
+       ('2021-03-13 12:00:00', 42, 5, 1, 22, 2),
+       ('2021-03-15 12:00:00', 42, 5, 2, 22, 2),
+       ('2021-03-17 12:00:00', 42, 5, 3, 22, 2),
+       ('2021-03-19 12:00:00', 42, 5, 4, 22, 2),
+       ('2021-03-22 10:00:00', 46, 5, 1, 26, 6),
+       ('2021-03-24 10:00:00', 46, 5, 2, 26, 6),
+       ('2021-03-26 10:00:00', 46, 5, 3, 26, 6),
+       ('2021-03-28 10:00:00', 46, 5, 4, 26, 6),
+       ('2021-03-30 12:00:00', 38, 5, 1, 3, 3),
+       ('2021-04-01 12:00:00', 38, 5, 2, 3, 3),
+       ('2021-04-03 12:00:00', 38, 5, 3, 3, 3),
+       ('2021-04-05 12:00:00', 38, 5, 4, 3, 3);
 
 
 INSERT INTO `practicals`
@@ -1096,173 +1077,132 @@ VALUES (1, 'http://lorempixel.com/640/480/'),
        (99, 'http://lorempixel.com/640/480/'),
        (100, 'http://lorempixel.com/640/480/'); -- 100
 
-call students_practicals_fill_sp(1, 2, '2021-03-29 15:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(1, 33, '2021-03-06 10:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(1, 35, '2021-03-16 15:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(1, 57, '2021-03-26 15:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(1, 86, '2021-03-23 15:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(1, 89, '2021-03-30 15:00:00', 'http://lorempixel.com/640/480/');
 
-call students_practicals_fill_sp(3, 14, '2021-04-10 20:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(3, 18, '2021-04-16 20:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(3, 74, '2021-03-15 20:00:00', 'http://lorempixel.com/640/480/');
-
-call students_practicals_fill_sp(4, 42, '2021-03-25 13:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(4, 87, '2021-04-15 20:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(4, 98, '2021-04-21 15:00:00', 'http://lorempixel.com/640/480/');
-
-call students_practicals_fill_sp(5, 9, '2021-04-16 12:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(5, 88, '2021-03-30 10:00:00', 'http://lorempixel.com/640/480/');
-
-call students_practicals_fill_sp(7, 42, '2021-03-27 19:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(7, 87, '2021-03-20 20:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(7, 98, '2021-04-12 10:00:00', 'http://lorempixel.com/640/480/');
-
-call students_practicals_fill_sp(9, 4, '2021-04-27 15:00:00', 'http://lorempixel.com/640/480/');
-
-call students_practicals_fill_sp(10, 44, '2021-03-30 13:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(10, 88, '2021-04-16 20:00:00', 'http://lorempixel.com/640/480/');
-
-call students_practicals_fill_sp(12, 13, '2021-04-23 10:00:00', 'http://lorempixel.com/640/480/');
-
-call students_practicals_fill_sp(14, 6, '2021-04-24 15:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(14, 42, '2021-03-29 13:00:00', 'http://lorempixel.com/640/480/');
-
-call students_practicals_fill_sp(16, 1, '2021-03-27 15:00:00', 'http://lorempixel.com/640/480/');
-
-call students_practicals_fill_sp(23, 16, '2021-04-18 20:00:00', 'http://lorempixel.com/640/480/');
-
-call students_practicals_fill_sp(24, 5, '2021-04-16 20:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(24, 98, '2021-04-24 15:00:00', 'http://lorempixel.com/640/480/');
-
-call students_practicals_fill_sp(25, 8, '2021-04-10 12:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(25, 60, '2021-03-12 15:00:00', 'http://lorempixel.com/640/480/');
-call students_practicals_fill_sp(25, 74, '2021-03-20 12:00:00', 'http://lorempixel.com/640/480/'); -- 30
+-- fill table students_practicals:
+INSERT INTO `students_practicals` VALUES (1, 2, '2021-03-29 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (1, 33, '2021-03-06 10:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (1, 35, '2021-03-16 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (1, 57, '2021-03-26 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (1, 86, '2021-03-23 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (1, 89, '2021-03-30 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (3, 14, '2021-04-10 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (3, 18, '2021-04-16 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (3, 74, '2021-03-15 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (4, 42, '2021-03-25 13:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (4, 87, '2021-04-15 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (4, 98, '2021-04-21 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (5, 9, '2021-04-16 12:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (5, 88, '2021-03-30 10:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (7, 42, '2021-03-27 19:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (7, 87, '2021-03-20 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (7, 98, '2021-04-12 10:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (9, 4, '2021-04-27 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (10, 44, '2021-03-30 13:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (10, 88, '2021-04-16 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (12, 13, '2021-04-23 10:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (14, 6, '2021-04-24 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (14, 42, '2021-03-29 13:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (16, 1, '2021-03-27 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (23, 16, '2021-04-18 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (24, 5, '2021-04-16 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (24, 98, '2021-04-24 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (25, 8, '2021-04-10 12:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (25, 60, '2021-03-12 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals` VALUES (25, 74, '2021-03-20 12:00:00', 'http://lorempixel.com/640/480/'); -- 30
 
 
-call teachers_practicals_fill_sp(36, 16, 1, 4);
-call teachers_practicals_fill_sp(36, 1, 2, 5);
-call teachers_practicals_fill_sp(37, 9, 4, 5);
-call teachers_practicals_fill_sp(37, 24, 5, 5);
-call teachers_practicals_fill_sp(37, 14, 6, 5);
-call teachers_practicals_fill_sp(38, 25, 8, 3);
-call teachers_practicals_fill_sp(38, 5, 9, 5);
-call teachers_practicals_fill_sp(39, 12, 13, 5);
-call teachers_practicals_fill_sp(40, 3, 14, 5);
-call teachers_practicals_fill_sp(40, 23, 16, 5);
-call teachers_practicals_fill_sp(40, 3, 18, 5);
+INSERT INTO `teachers_practicals` VALUES (36, 16, 1, 4);
+INSERT INTO `teachers_practicals` VALUES (36, 1, 2, 5);
+INSERT INTO `teachers_practicals` VALUES (37, 9, 4, 5);
+INSERT INTO `teachers_practicals` VALUES (37, 24, 5, 5);
+INSERT INTO `teachers_practicals` VALUES (37, 14, 6, 5);
+INSERT INTO `teachers_practicals` VALUES (38, 25, 8, 3);
+INSERT INTO `teachers_practicals` VALUES (38, 5, 9, 5);
+INSERT INTO `teachers_practicals` VALUES (39, 12, 13, 5);
+INSERT INTO `teachers_practicals` VALUES (40, 3, 14, 5);
+INSERT INTO `teachers_practicals` VALUES (40, 23, 16, 5);
+INSERT INTO `teachers_practicals` VALUES (40, 3, 18, 5);
+INSERT INTO `teachers_practicals` VALUES (45, 1, 33, 5);
+INSERT INTO `teachers_practicals` VALUES (45, 1, 35, 4);
+INSERT INTO `teachers_practicals` VALUES (48, 4, 42, 5);
+INSERT INTO `teachers_practicals` VALUES (48, 7, 42, 4);
+INSERT INTO `teachers_practicals` VALUES (48, 14, 42, 5);
+INSERT INTO `teachers_practicals` VALUES (48, 10, 44, 5);
+INSERT INTO `teachers_practicals` VALUES (37, 1, 57, 5);
+INSERT INTO `teachers_practicals` VALUES (38, 25, 60, 5);
+INSERT INTO `teachers_practicals` VALUES (42, 3, 74, 3);
+INSERT INTO `teachers_practicals` VALUES (42, 25, 74, 5);
+INSERT INTO `teachers_practicals` VALUES (46, 1, 86, 4);
+INSERT INTO `teachers_practicals` VALUES (46, 4, 87, 5);
+INSERT INTO `teachers_practicals` VALUES (46, 7, 87, 4);
+INSERT INTO `teachers_practicals` VALUES (46, 5, 88, 5);
+INSERT INTO `teachers_practicals` VALUES (46, 10, 88, 5);
+INSERT INTO `teachers_practicals` VALUES (46, 1, 89, 5);
+INSERT INTO `teachers_practicals` VALUES (49, 4, 98, 5);
+INSERT INTO `teachers_practicals` VALUES (49, 7, 98, 4);
+INSERT INTO `teachers_practicals` VALUES (49, 24, 98, 5);
 
 
+INSERT INTO `messages`
+VALUES (1, 2,
+        'Nobis quia et tempore ducimus. Exercitationem aliquam sit dolor numquam incidunt. Et at ut consequatur qui officia dolore maiores. Rerum sit debitis exercitationem repudiandae eligendi.', '2021-03-30 13:00:00'),
+       (2, 1,
+        'Qui culpa id quis molestias unde. Rem numquam aspernatur ipsa consequuntur soluta. Aut id et quia eaque nostrum praesentium. Maiores quia aut tempore velit qui.', '2021-03-30 13:00:00'),
+       (3, 1,
+        'Atque excepturi natus et sed. Sunt ipsum suscipit ut tempora enim id et. Eum ut facere ab adipisci. Facilis accusantium molestiae quibusdam id minima ut. Consectetur explicabo minus vitae ipsa ut.', '2021-03-30 13:00:00'),
+       (1, 3,
+        'Quia iste voluptas et culpa aut et ullam modi. Debitis cum vel accusantium sed. Et nulla aut rerum voluptatem nam nemo et.', '2021-03-30 13:00:00'),
+       (5, 4,
+        'Voluptatem tempora beatae sed ut. Optio et doloribus officiis rerum error et culpa. In autem aspernatur cupiditate. Dignissimos unde similique modi.', '2021-03-30 13:00:00'),
+       (4, 5,
+        'Facere quia fugit alias reprehenderit et. Tempore eos saepe itaque impedit quos animi. Incidunt sequi ut molestiae perspiciatis laborum porro id. Est illum aperiam magnam veniam.', '2021-03-30 13:00:00'),
+       (7, 6, 'Qui voluptatem eligendi officiis quisquam unde nemo. Laudantium occaecati dolore quia nihil.', '2021-03-30 13:00:00'),
+       (8, 6,
+        'Voluptas suscipit asperiores consequatur ipsam sunt omnis. Aliquid et voluptate voluptatem ut accusantium labore vitae.', '2021-03-30 13:00:00'),
+       (6, 9, 'Temporibus dolores et consequatur dolorem rerum dignissimos. Atque saepe sit quos sed.', '2021-03-30 13:00:00'),
+       (6, 10,
+        'Nihil dolorum itaque veritatis molestias aut occaecati sequi. Quis libero provident labore sit repellendus. Est vitae qui consequatur sequi pariatur non.', '2021-03-30 13:00:00'),
+       (11, 7,
+        'Id beatae ut veritatis dolorem. Perferendis consequatur officia et. Qui officiis culpa dolore eaque id voluptatem quia. Eveniet consequuntur harum blanditiis tenetur veritatis blanditiis dicta.', '2021-03-30 13:00:00'),
+       (7, 12,
+        'Eum culpa quo nobis consequuntur non dolorum dignissimos et. Fuga nobis et aut aut dolores. Omnis quisquam voluptates deserunt. At vel voluptate veritatis et tenetur aut rerum.', '2021-03-30 13:00:00'),
+       (12, 13,
+        'Hic omnis voluptatem sunt et nihil nihil. Rem molestias maiores nihil est voluptates occaecati. Quia aut natus ipsum. Nihil omnis consequatur quo.', '2021-03-30 13:00:00'),
+       (5, 14,
+        'Laboriosam aliquam unde qui repellendus distinctio. Ipsa rerum laboriosam molestiae dolores hic vel repellendus. Similique consequatur eaque corporis necessitatibus debitis itaque rerum aliquid.', '2021-03-30 13:00:00'),
+       (15, 11,
+        'Assumenda et dolorem eveniet amet sed aut. Velit esse quae ipsum cupiditate cupiditate. Necessitatibus alias tempore quisquam atque. Omnis voluptatem asperiores est nihil et.', '2021-03-30 13:00:00'),
+       (12, 16,
+        'Sit et repellendus distinctio ratione est. Illum tempore et inventore eligendi est ipsum doloremque nulla. Vel dicta cum exercitationem eveniet.', '2021-03-30 13:00:00'),
+       (5, 17,
+        'Repellendus at est aut molestiae voluptatem. Cumque ea expedita officiis qui. Voluptatem qui officia quia non voluptas rerum cum.', '2021-03-30 13:00:00'),
+       (1, 18,
+        'Natus omnis molestiae reprehenderit quas in accusantium. Commodi alias aut suscipit libero assumenda sunt. Eos doloremque debitis fugiat autem atque.', '2021-03-30 13:00:00'),
+       (19, 14,
+        'Quis ad doloremque eaque et et. Asperiores pariatur harum laboriosam qui. Nesciunt quaerat qui qui necessitatibus alias doloremque molestiae. Fugiat illum qui nostrum debitis.', '2021-03-30 13:00:00'),
+       (14, 20,
+        'Doloremque iusto quidem inventore delectus voluptate sit ducimus aut. Hic vero iusto cupiditate quia. Fugiat sunt natus debitis et. Quo alias quisquam non ut.', '2021-03-30 13:00:00'),
+       (20, 21,
+        'Animi quibusdam doloribus dolorum. Qui aut tempore in non. Excepturi et autem dignissimos et est at ex. Eum aperiam tempore molestiae.', '2021-03-30 13:00:00'),
+       (21, 20,
+        'Cum dolores corporis fugiat natus quae explicabo. Qui officiis veniam temporibus nemo explicabo porro. Eius mollitia ea omnis eum. Repellendus ut corrupti esse debitis et similique incidunt.', '2021-03-30 13:00:00'),
+       (23, 15,
+        'Recusandae earum quisquam nobis non. Nesciunt iste dolores nam necessitatibus itaque. Culpa sed et ab cum aliquam blanditiis nihil.', '2021-03-30 13:00:00'),
+       (21, 24,
+        'Officiis et debitis fuga aliquam consequatur delectus. Quam quo quae ducimus aut ducimus. Qui sit ut asperiores officiis repellat ullam.', '2021-03-30 13:00:00'),
+       (25, 22,
+        'Aut itaque officia beatae nesciunt laborum odio. Quasi nihil officiis quo quam. Delectus earum cupiditate ut nulla molestias praesentium officia.', '2021-03-30 13:00:00'),
+       (22, 25,
+        'Aut eos tenetur numquam quos itaque et. Qui voluptatem nostrum architecto laborum et omnis. Temporibus qui maiores cum et a. Voluptatum et non in culpa ipsa mollitia quia.', '2021-03-30 13:00:00'),
+       (2, 27,
+        'Rerum et voluptatem earum ea. Dolores et sequi repellendus in vel quis dolorem.\nPlaceat rerum voluptatibus praesentium omnis est. Perferendis aliquid fuga eum odit dolores soluta.', '2021-03-30 13:00:00'),
+       (28, 21,
+        'Exercitationem corporis dolorum sit accusantium molestiae dolorem iste. Distinctio ut nihil architecto voluptatibus. Aut qui et fugit voluptate. Beatae dolor expedita quaerat.', '2021-03-30 13:00:00'),
+       (29, 9,
+        'Dolorum hic sed ad deserunt optio odio minus. Quod sed explicabo dignissimos quidem consequatur accusamus minus.', '2021-03-30 13:00:00'),
+       (30, 3, 'Illo odio ipsam atque labore nemo. Totam consequatur non nihil. Eum officia exercitationem sunt est.', '2021-03-30 13:00:00'); -- 30
 
 
-
-
-
-
-
-
-
-INSERT INTO `teachers_practicals`
-VALUES (36, 1, 1, 5),
-       (36, 6, 76, 4),
-       (36, 11, 46, 5),
-       (36, 16, 16, 4),
-       (36, 21, 91, 4),
-       (36, 26, 61, 4),
-       (36, 31, 31, 4),
-       (37, 2, 2, 3),
-       (37, 7, 77, 5),
-       (37, 12, 47, 5),
-       (37, 17, 17, 5),
-       (37, 22, 92, 3),
-       (37, 27, 62, 5),
-       (37, 32, 32, 4),
-       (38, 3, 3, 5),
-       (38, 8, 78, 4),
-       (38, 13, 48, 5),
-       (38, 18, 18, 5),
-       (38, 23, 93, 4),
-       (38, 28, 63, 5),
-       (38, 33, 33, 3),
-       (39, 4, 4, 5),
-       (39, 9, 79, 3),
-       (39, 14, 49, 3),
-       (39, 19, 19, 5),
-       (39, 24, 94, 3),
-       (39, 29, 64, 3),
-       (39, 34, 34, 5),
-       (40, 5, 5, 3),
-       (40, 10, 80, 3),
-       (40, 15, 50, 4),
-       (40, 20, 20, 4),
-       (40, 25, 95, 4),
-       (40, 30, 65, 3),
-       (40, 35, 35, 5),
-       (41, 1, 36, 3),
-       (41, 6, 6, 3),
-       (41, 11, 81, 5),
-       (41, 16, 51, 3),
-       (41, 21, 21, 3),
-       (41, 26, 96, 5),
-       (41, 31, 66, 3),
-       (42, 2, 37, 3),
-       (42, 7, 7, 3),
-       (42, 12, 82, 5),
-       (42, 17, 52, 5),
-       (42, 22, 22, 4),
-       (42, 27, 97, 3),
-       (42, 32, 67, 4),
-       (43, 3, 38, 3),
-       (43, 8, 8, 5),
-       (43, 13, 83, 4),
-       (43, 18, 53, 5),
-       (43, 23, 23, 3),
-       (43, 28, 98, 4),
-       (43, 33, 68, 5),
-       (44, 4, 39, 3),
-       (44, 9, 9, 3),
-       (44, 14, 84, 4),
-       (44, 19, 54, 3),
-       (44, 24, 24, 3),
-       (44, 29, 99, 3),
-       (44, 34, 69, 5),
-       (45, 5, 40, 5),
-       (45, 10, 10, 3),
-       (45, 15, 85, 3),
-       (45, 20, 55, 3),
-       (45, 25, 25, 5),
-       (45, 30, 100, 5),
-       (45, 35, 70, 4),
-       (46, 1, 71, 3),
-       (46, 6, 41, 4),
-       (46, 11, 11, 4),
-       (46, 16, 86, 4),
-       (46, 21, 56, 3),
-       (46, 26, 26, 4),
-       (47, 2, 72, 4),
-       (47, 7, 42, 3),
-       (47, 12, 12, 4),
-       (47, 17, 87, 5),
-       (47, 22, 57, 3),
-       (47, 27, 27, 4),
-       (48, 3, 73, 3),
-       (48, 8, 43, 4),
-       (48, 13, 13, 3),
-       (48, 18, 88, 4),
-       (48, 23, 58, 4),
-       (48, 28, 28, 4),
-       (49, 4, 74, 5),
-       (49, 9, 44, 4),
-       (49, 14, 14, 4),
-       (49, 19, 89, 3),
-       (49, 24, 59, 4),
-       (49, 29, 29, 3),
-       (50, 5, 75, 5),
-       (50, 10, 45, 3),
-       (50, 15, 15, 3),
-       (50, 20, 90, 3),
-       (50, 25, 60, 4),
-       (50, 30, 30, 4); -- 100
 
 
 INSERT INTO `reviews`
@@ -1465,503 +1405,310 @@ VALUES (1, 11, 3),
        (9, 34, 4),
        (10, 35, 4); -- 50
 
-INSERT INTO `videos`
-VALUES (1, 1, 'http://lorempixel.com/640/480/'),
-       (2, 2, 'http://lorempixel.com/640/480/'),
-       (3, 3, 'http://lorempixel.com/640/480/'),
-       (4, 4, 'http://lorempixel.com/640/480/'),
-       (5, 5, 'http://lorempixel.com/640/480/'),
-       (6, 6, 'http://lorempixel.com/640/480/'),
-       (7, 7, 'http://lorempixel.com/640/480/'),
-       (8, 8, 'http://lorempixel.com/640/480/'),
-       (9, 9, 'http://lorempixel.com/640/480/'),
-       (10, 10, 'http://lorempixel.com/640/480/'),
-       (11, 11, 'http://lorempixel.com/640/480/'),
-       (12, 12, 'http://lorempixel.com/640/480/'),
-       (13, 13, 'http://lorempixel.com/640/480/'),
-       (14, 14, 'http://lorempixel.com/640/480/'),
-       (15, 15, 'http://lorempixel.com/640/480/'),
-       (16, 16, 'http://lorempixel.com/640/480/'),
-       (17, 17, 'http://lorempixel.com/640/480/'),
-       (18, 18, 'http://lorempixel.com/640/480/'),
-       (19, 19, 'http://lorempixel.com/640/480/'),
-       (20, 20, 'http://lorempixel.com/640/480/'),
-       (21, 21, 'http://lorempixel.com/640/480/'),
-       (22, 22, 'http://lorempixel.com/640/480/'),
-       (23, 23, 'http://lorempixel.com/640/480/'),
-       (24, 24, 'http://lorempixel.com/640/480/'),
-       (25, 25, 'http://lorempixel.com/640/480/'),
-       (26, 26, 'http://lorempixel.com/640/480/'),
-       (27, 27, 'http://lorempixel.com/640/480/'),
-       (28, 28, 'http://lorempixel.com/640/480/'),
-       (29, 29, 'http://lorempixel.com/640/480/'),
-       (30, 30, 'http://lorempixel.com/640/480/'),
-       (31, 31, 'http://lorempixel.com/640/480/'),
-       (32, 32, 'http://lorempixel.com/640/480/'),
-       (33, 33, 'http://lorempixel.com/640/480/'),
-       (34, 34, 'http://lorempixel.com/640/480/'),
-       (35, 35, 'http://lorempixel.com/640/480/'),
-       (36, 36, 'http://lorempixel.com/640/480/'),
-       (37, 37, 'http://lorempixel.com/640/480/'),
-       (38, 38, 'http://lorempixel.com/640/480/'),
-       (39, 39, 'http://lorempixel.com/640/480/'),
-       (40, 40, 'http://lorempixel.com/640/480/'),
-       (41, 41, 'http://lorempixel.com/640/480/'),
-       (42, 42, 'http://lorempixel.com/640/480/'),
-       (43, 43, 'http://lorempixel.com/640/480/'),
-       (44, 44, 'http://lorempixel.com/640/480/'),
-       (45, 45, 'http://lorempixel.com/640/480/'),
-       (46, 46, 'http://lorempixel.com/640/480/'),
-       (47, 47, 'http://lorempixel.com/640/480/'),
-       (48, 48, 'http://lorempixel.com/640/480/'),
-       (49, 49, 'http://lorempixel.com/640/480/'),
-       (50, 50, 'http://lorempixel.com/640/480/'),
-       (51, 51, 'http://lorempixel.com/640/480/'),
-       (52, 52, 'http://lorempixel.com/640/480/'),
-       (53, 53, 'http://lorempixel.com/640/480/'),
-       (54, 54, 'http://lorempixel.com/640/480/'),
-       (55, 55, 'http://lorempixel.com/640/480/'),
-       (56, 56, 'http://lorempixel.com/640/480/'),
-       (57, 57, 'http://lorempixel.com/640/480/'),
-       (58, 58, 'http://lorempixel.com/640/480/'),
-       (59, 59, 'http://lorempixel.com/640/480/'),
-       (60, 60, 'http://lorempixel.com/640/480/'),
-       (61, 61, 'http://lorempixel.com/640/480/'),
-       (62, 62, 'http://lorempixel.com/640/480/'),
-       (63, 63, 'http://lorempixel.com/640/480/'),
-       (64, 64, 'http://lorempixel.com/640/480/'),
-       (65, 65, 'http://lorempixel.com/640/480/'),
-       (66, 66, 'http://lorempixel.com/640/480/'),
-       (67, 67, 'http://lorempixel.com/640/480/'),
-       (68, 68, 'http://lorempixel.com/640/480/'),
-       (69, 69, 'http://lorempixel.com/640/480/'),
-       (70, 70, 'http://lorempixel.com/640/480/'),
-       (71, 71, 'http://lorempixel.com/640/480/'),
-       (72, 72, 'http://lorempixel.com/640/480/'),
-       (73, 73, 'http://lorempixel.com/640/480/'),
-       (74, 74, 'http://lorempixel.com/640/480/'),
-       (75, 75, 'http://lorempixel.com/640/480/'),
-       (76, 76, 'http://lorempixel.com/640/480/'),
-       (77, 77, 'http://lorempixel.com/640/480/'),
-       (78, 78, 'http://lorempixel.com/640/480/'),
-       (79, 79, 'http://lorempixel.com/640/480/'),
-       (80, 80, 'http://lorempixel.com/640/480/'),
-       (81, 81, 'http://lorempixel.com/640/480/'),
-       (82, 82, 'http://lorempixel.com/640/480/'),
-       (83, 83, 'http://lorempixel.com/640/480/'),
-       (84, 84, 'http://lorempixel.com/640/480/'),
-       (85, 85, 'http://lorempixel.com/640/480/'),
-       (86, 86, 'http://lorempixel.com/640/480/'),
-       (87, 87, 'http://lorempixel.com/640/480/'),
-       (88, 88, 'http://lorempixel.com/640/480/'),
-       (89, 89, 'http://lorempixel.com/640/480/'),
-       (90, 90, 'http://lorempixel.com/640/480/'),
-       (91, 91, 'http://lorempixel.com/640/480/'),
-       (92, 92, 'http://lorempixel.com/640/480/'),
-       (93, 93, 'http://lorempixel.com/640/480/'),
-       (94, 94, 'http://lorempixel.com/640/480/'),
-       (95, 95, 'http://lorempixel.com/640/480/'),
-       (96, 96, 'http://lorempixel.com/640/480/'),
-       (97, 97, 'http://lorempixel.com/640/480/'),
-       (98, 98, 'http://lorempixel.com/640/480/'),
-       (99, 99, 'http://lorempixel.com/640/480/'),
-       (100, 100, 'http://lorempixel.com/640/480/'); -- 100
+#все
+# INSERT INTO `videos`
+# VALUES (1, 1, 'http://lorempixel.com/640/480/'),
+#        (2, 2, 'http://lorempixel.com/640/480/'),
+#        (3, 3, 'http://lorempixel.com/640/480/'),
+#        (4, 4, 'http://lorempixel.com/640/480/'),
+#        (5, 5, 'http://lorempixel.com/640/480/'),
+#        (6, 6, 'http://lorempixel.com/640/480/'),
+#        (7, 7, 'http://lorempixel.com/640/480/'),
+#        (8, 8, 'http://lorempixel.com/640/480/'),
+#        (9, 9, 'http://lorempixel.com/640/480/'),
+#        (10, 10, 'http://lorempixel.com/640/480/'),
+#        (11, 11, 'http://lorempixel.com/640/480/'),
+#        (12, 12, 'http://lorempixel.com/640/480/'),
+#        (13, 13, 'http://lorempixel.com/640/480/'),
+#        (14, 14, 'http://lorempixel.com/640/480/'),
+#        (15, 15, 'http://lorempixel.com/640/480/'),
+#        (16, 16, 'http://lorempixel.com/640/480/'),
+#        (17, 17, 'http://lorempixel.com/640/480/'),
+#        (18, 18, 'http://lorempixel.com/640/480/'),
+#        (19, 19, 'http://lorempixel.com/640/480/'),
+#        (20, 20, 'http://lorempixel.com/640/480/'),
+#        (21, 21, 'http://lorempixel.com/640/480/'),
+#        (22, 22, 'http://lorempixel.com/640/480/'),
+#        (23, 23, 'http://lorempixel.com/640/480/'),
+#        (24, 24, 'http://lorempixel.com/640/480/'),
+#        (25, 25, 'http://lorempixel.com/640/480/'),
+#        (26, 26, 'http://lorempixel.com/640/480/'),
+#        (27, 27, 'http://lorempixel.com/640/480/'),
+#        (28, 28, 'http://lorempixel.com/640/480/'),
+#        (29, 29, 'http://lorempixel.com/640/480/'),
+#        (30, 30, 'http://lorempixel.com/640/480/'),
+#        (31, 31, 'http://lorempixel.com/640/480/'),
+#        (32, 32, 'http://lorempixel.com/640/480/'),
+#        (33, 33, 'http://lorempixel.com/640/480/'),
+#        (34, 34, 'http://lorempixel.com/640/480/'),
+#        (35, 35, 'http://lorempixel.com/640/480/'),
+#        (36, 36, 'http://lorempixel.com/640/480/'),
+#        (37, 37, 'http://lorempixel.com/640/480/'),
+#        (38, 38, 'http://lorempixel.com/640/480/'),
+#        (39, 39, 'http://lorempixel.com/640/480/'),
+#        (40, 40, 'http://lorempixel.com/640/480/'),
+#        (41, 41, 'http://lorempixel.com/640/480/'),
+#        (42, 42, 'http://lorempixel.com/640/480/'),
+#        (43, 43, 'http://lorempixel.com/640/480/'),
+#        (44, 44, 'http://lorempixel.com/640/480/'),
+#        (45, 45, 'http://lorempixel.com/640/480/'),
+#        (46, 46, 'http://lorempixel.com/640/480/'),
+#        (47, 47, 'http://lorempixel.com/640/480/'),
+#        (48, 48, 'http://lorempixel.com/640/480/'),
+#        (49, 49, 'http://lorempixel.com/640/480/'),
+#        (50, 50, 'http://lorempixel.com/640/480/'),
+#        (51, 51, 'http://lorempixel.com/640/480/'),
+#        (52, 52, 'http://lorempixel.com/640/480/'),
+#        (53, 53, 'http://lorempixel.com/640/480/'),
+#        (54, 54, 'http://lorempixel.com/640/480/'),
+#        (55, 55, 'http://lorempixel.com/640/480/'),
+#        (56, 56, 'http://lorempixel.com/640/480/'),
+#        (57, 57, 'http://lorempixel.com/640/480/'),
+#        (58, 58, 'http://lorempixel.com/640/480/'),
+#        (59, 59, 'http://lorempixel.com/640/480/'),
+#        (60, 60, 'http://lorempixel.com/640/480/'),
+#        (61, 61, 'http://lorempixel.com/640/480/'),
+#        (62, 62, 'http://lorempixel.com/640/480/'),
+#        (63, 63, 'http://lorempixel.com/640/480/'),
+#        (64, 64, 'http://lorempixel.com/640/480/'),
+#        (65, 65, 'http://lorempixel.com/640/480/'),
+#        (66, 66, 'http://lorempixel.com/640/480/'),
+#        (67, 67, 'http://lorempixel.com/640/480/'),
+#        (68, 68, 'http://lorempixel.com/640/480/'),
+#        (69, 69, 'http://lorempixel.com/640/480/'),
+#        (70, 70, 'http://lorempixel.com/640/480/'),
+#        (71, 71, 'http://lorempixel.com/640/480/'),
+#        (72, 72, 'http://lorempixel.com/640/480/'),
+#        (73, 73, 'http://lorempixel.com/640/480/'),
+#        (74, 74, 'http://lorempixel.com/640/480/'),
+#        (75, 75, 'http://lorempixel.com/640/480/'),
+#        (76, 76, 'http://lorempixel.com/640/480/'),
+#        (77, 77, 'http://lorempixel.com/640/480/'),
+#        (78, 78, 'http://lorempixel.com/640/480/'),
+#        (79, 79, 'http://lorempixel.com/640/480/'),
+#        (80, 80, 'http://lorempixel.com/640/480/'),
+#        (81, 81, 'http://lorempixel.com/640/480/'),
+#        (82, 82, 'http://lorempixel.com/640/480/'),
+#        (83, 83, 'http://lorempixel.com/640/480/'),
+#        (84, 84, 'http://lorempixel.com/640/480/'),
+#        (85, 85, 'http://lorempixel.com/640/480/'),
+#        (86, 86, 'http://lorempixel.com/640/480/'),
+#        (87, 87, 'http://lorempixel.com/640/480/'),
+#        (88, 88, 'http://lorempixel.com/640/480/'),
+#        (89, 89, 'http://lorempixel.com/640/480/'),
+#        (90, 90, 'http://lorempixel.com/640/480/'),
+#        (91, 91, 'http://lorempixel.com/640/480/'),
+#        (92, 92, 'http://lorempixel.com/640/480/'),
+#        (93, 93, 'http://lorempixel.com/640/480/'),
+#        (94, 94, 'http://lorempixel.com/640/480/'),
+#        (95, 95, 'http://lorempixel.com/640/480/'),
+#        (96, 96, 'http://lorempixel.com/640/480/'),
+#        (97, 97, 'http://lorempixel.com/640/480/'),
+#        (98, 98, 'http://lorempixel.com/640/480/'),
+#        (99, 99, 'http://lorempixel.com/640/480/'),
+#        (100, 100, 'http://lorempixel.com/640/480/'); -- 100
+#
+# INSERT INTO `documents`
+# VALUES (1, 1, 'http://lorempixel.com/640/480/'),
+#        (2, 2, 'http://lorempixel.com/640/480/'),
+#        (3, 3, 'http://lorempixel.com/640/480/'),
+#        (4, 4, 'http://lorempixel.com/640/480/'),
+#        (5, 5, 'http://lorempixel.com/640/480/'),
+#        (6, 6, 'http://lorempixel.com/640/480/'),
+#        (7, 7, 'http://lorempixel.com/640/480/'),
+#        (8, 8, 'http://lorempixel.com/640/480/'),
+#        (9, 9, 'http://lorempixel.com/640/480/'),
+#        (10, 10, 'http://lorempixel.com/640/480/'),
+#        (11, 11, 'http://lorempixel.com/640/480/'),
+#        (12, 12, 'http://lorempixel.com/640/480/'),
+#        (13, 13, 'http://lorempixel.com/640/480/'),
+#        (14, 14, 'http://lorempixel.com/640/480/'),
+#        (15, 15, 'http://lorempixel.com/640/480/'),
+#        (16, 16, 'http://lorempixel.com/640/480/'),
+#        (17, 17, 'http://lorempixel.com/640/480/'),
+#        (18, 18, 'http://lorempixel.com/640/480/'),
+#        (19, 19, 'http://lorempixel.com/640/480/'),
+#        (20, 20, 'http://lorempixel.com/640/480/'),
+#        (21, 21, 'http://lorempixel.com/640/480/'),
+#        (22, 22, 'http://lorempixel.com/640/480/'),
+#        (23, 23, 'http://lorempixel.com/640/480/'),
+#        (24, 24, 'http://lorempixel.com/640/480/'),
+#        (25, 25, 'http://lorempixel.com/640/480/'),
+#        (26, 26, 'http://lorempixel.com/640/480/'),
+#        (27, 27, 'http://lorempixel.com/640/480/'),
+#        (28, 28, 'http://lorempixel.com/640/480/'),
+#        (29, 29, 'http://lorempixel.com/640/480/'),
+#        (30, 30, 'http://lorempixel.com/640/480/'),
+#        (31, 31, 'http://lorempixel.com/640/480/'),
+#        (32, 32, 'http://lorempixel.com/640/480/'),
+#        (33, 33, 'http://lorempixel.com/640/480/'),
+#        (34, 34, 'http://lorempixel.com/640/480/'),
+#        (35, 35, 'http://lorempixel.com/640/480/'),
+#        (36, 36, 'http://lorempixel.com/640/480/'),
+#        (37, 37, 'http://lorempixel.com/640/480/'),
+#        (38, 38, 'http://lorempixel.com/640/480/'),
+#        (39, 39, 'http://lorempixel.com/640/480/'),
+#        (40, 40, 'http://lorempixel.com/640/480/'),
+#        (41, 41, 'http://lorempixel.com/640/480/'),
+#        (42, 42, 'http://lorempixel.com/640/480/'),
+#        (43, 43, 'http://lorempixel.com/640/480/'),
+#        (44, 44, 'http://lorempixel.com/640/480/'),
+#        (45, 45, 'http://lorempixel.com/640/480/'),
+#        (46, 46, 'http://lorempixel.com/640/480/'),
+#        (47, 47, 'http://lorempixel.com/640/480/'),
+#        (48, 48, 'http://lorempixel.com/640/480/'),
+#        (49, 49, 'http://lorempixel.com/640/480/'),
+#        (50, 50, 'http://lorempixel.com/640/480/'),
+#        (51, 51, 'http://lorempixel.com/640/480/'),
+#        (52, 52, 'http://lorempixel.com/640/480/'),
+#        (53, 53, 'http://lorempixel.com/640/480/'),
+#        (54, 54, 'http://lorempixel.com/640/480/'),
+#        (55, 55, 'http://lorempixel.com/640/480/'),
+#        (56, 56, 'http://lorempixel.com/640/480/'),
+#        (57, 57, 'http://lorempixel.com/640/480/'),
+#        (58, 58, 'http://lorempixel.com/640/480/'),
+#        (59, 59, 'http://lorempixel.com/640/480/'),
+#        (60, 60, 'http://lorempixel.com/640/480/'),
+#        (61, 61, 'http://lorempixel.com/640/480/'),
+#        (62, 62, 'http://lorempixel.com/640/480/'),
+#        (63, 63, 'http://lorempixel.com/640/480/'),
+#        (64, 64, 'http://lorempixel.com/640/480/'),
+#        (65, 65, 'http://lorempixel.com/640/480/'),
+#        (66, 66, 'http://lorempixel.com/640/480/'),
+#        (67, 67, 'http://lorempixel.com/640/480/'),
+#        (68, 68, 'http://lorempixel.com/640/480/'),
+#        (69, 69, 'http://lorempixel.com/640/480/'),
+#        (70, 70, 'http://lorempixel.com/640/480/'),
+#        (71, 71, 'http://lorempixel.com/640/480/'),
+#        (72, 72, 'http://lorempixel.com/640/480/'),
+#        (73, 73, 'http://lorempixel.com/640/480/'),
+#        (74, 74, 'http://lorempixel.com/640/480/'),
+#        (75, 75, 'http://lorempixel.com/640/480/'),
+#        (76, 76, 'http://lorempixel.com/640/480/'),
+#        (77, 77, 'http://lorempixel.com/640/480/'),
+#        (78, 78, 'http://lorempixel.com/640/480/'),
+#        (79, 79, 'http://lorempixel.com/640/480/'),
+#        (80, 80, 'http://lorempixel.com/640/480/'),
+#        (81, 81, 'http://lorempixel.com/640/480/'),
+#        (82, 82, 'http://lorempixel.com/640/480/'),
+#        (83, 83, 'http://lorempixel.com/640/480/'),
+#        (84, 84, 'http://lorempixel.com/640/480/'),
+#        (85, 85, 'http://lorempixel.com/640/480/'),
+#        (86, 86, 'http://lorempixel.com/640/480/'),
+#        (87, 87, 'http://lorempixel.com/640/480/'),
+#        (88, 88, 'http://lorempixel.com/640/480/'),
+#        (89, 89, 'http://lorempixel.com/640/480/'),
+#        (90, 90, 'http://lorempixel.com/640/480/'),
+#        (91, 91, 'http://lorempixel.com/640/480/'),
+#        (92, 92, 'http://lorempixel.com/640/480/'),
+#        (93, 93, 'http://lorempixel.com/640/480/'),
+#        (94, 94, 'http://lorempixel.com/640/480/'),
+#        (95, 95, 'http://lorempixel.com/640/480/'),
+#        (96, 96, 'http://lorempixel.com/640/480/'),
+#        (97, 97, 'http://lorempixel.com/640/480/'),
+#        (98, 98, 'http://lorempixel.com/640/480/'),
+#        (99, 99, 'http://lorempixel.com/640/480/'),
+#        (100, 100, 'http://lorempixel.com/640/480/'); -- 100
+#
+# INSERT INTO `students_videos` -- 100
+# VALUES (1, 1, 1),
+#        (1, 36, 0),
+#        (1, 71, 1),
+#        (2, 2, 0),
+#        (2, 37, 1),
+#        (2, 72, 1),
+#        (3, 3, 1),
+#        (3, 38, 0),
+#        (3, 73, 0),
+#        (4, 4, 0),
+#        (4, 39, 1),
+#        (4, 74, 1),
+#        (5, 5, 0),
+#        (5, 40, 0),
+#        (5, 75, 1),
+#        (6, 6, 1),
+#        (6, 41, 0),
+#        (6, 76, 0),
+#        (7, 7, 0),
+#        (7, 42, 1),
+#        (7, 77, 1),
+#        (8, 8, 0),
+#        (8, 43, 1),
+#        (8, 78, 1),
+#        (9, 9, 0),
+#        (9, 44, 1),
+#        (9, 79, 1),
+#        (10, 10, 0),
+#        (10, 45, 1),
+#        (10, 80, 0),
+#        (11, 11, 1),
+#        (11, 46, 0),
+#        (11, 81, 1),
+#        (12, 12, 0),
+#        (12, 47, 1),
+#        (12, 82, 0),
+#        (13, 13, 1),
+#        (13, 48, 1),
+#        (13, 83, 1),
+#        (14, 14, 0),
+#        (14, 49, 1),
+#        (14, 84, 0),
+#        (15, 15, 1),
+#        (15, 50, 1),
+#        (15, 85, 1),
+#        (16, 16, 0),
+#        (16, 51, 1),
+#        (16, 86, 0),
+#        (17, 17, 1),
+#        (17, 52, 0),
+#        (17, 87, 0),
+#        (18, 18, 1),
+#        (18, 53, 1),
+#        (18, 88, 0),
+#        (19, 19, 1),
+#        (19, 54, 0),
+#        (19, 89, 1),
+#        (20, 20, 0),
+#        (20, 55, 0),
+#        (20, 90, 1),
+#        (21, 21, 0),
+#        (21, 56, 0),
+#        (21, 91, 0),
+#        (22, 22, 1),
+#        (22, 57, 1),
+#        (22, 92, 1),
+#        (23, 23, 0),
+#        (23, 58, 0),
+#        (23, 93, 1),
+#        (24, 24, 1),
+#        (24, 59, 1),
+#        (24, 94, 1),
+#        (25, 25, 1),
+#        (25, 60, 0),
+#        (25, 95, 0),
+#        (26, 26, 1),
+#        (26, 61, 1),
+#        (26, 96, 1),
+#        (27, 27, 0),
+#        (27, 62, 0),
+#        (27, 97, 0),
+#        (28, 28, 0),
+#        (28, 63, 1),
+#        (28, 98, 0),
+#        (29, 29, 0),
+#        (29, 64, 1),
+#        (29, 99, 1),
+#        (30, 30, 0),
+#        (30, 65, 0),
+#        (30, 100, 1),
+#        (31, 31, 1),
+#        (31, 66, 0),
+#        (32, 32, 0),
+#        (32, 67, 0),
+#        (33, 33, 0),
+#        (33, 68, 0),
+#        (34, 34, 0),
+#        (34, 69, 1),
+#        (35, 35, 0),
+#        (35, 70, 1);
 
-INSERT INTO `documents`
-VALUES (1, 1, 'http://lorempixel.com/640/480/'),
-       (2, 2, 'http://lorempixel.com/640/480/'),
-       (3, 3, 'http://lorempixel.com/640/480/'),
-       (4, 4, 'http://lorempixel.com/640/480/'),
-       (5, 5, 'http://lorempixel.com/640/480/'),
-       (6, 6, 'http://lorempixel.com/640/480/'),
-       (7, 7, 'http://lorempixel.com/640/480/'),
-       (8, 8, 'http://lorempixel.com/640/480/'),
-       (9, 9, 'http://lorempixel.com/640/480/'),
-       (10, 10, 'http://lorempixel.com/640/480/'),
-       (11, 11, 'http://lorempixel.com/640/480/'),
-       (12, 12, 'http://lorempixel.com/640/480/'),
-       (13, 13, 'http://lorempixel.com/640/480/'),
-       (14, 14, 'http://lorempixel.com/640/480/'),
-       (15, 15, 'http://lorempixel.com/640/480/'),
-       (16, 16, 'http://lorempixel.com/640/480/'),
-       (17, 17, 'http://lorempixel.com/640/480/'),
-       (18, 18, 'http://lorempixel.com/640/480/'),
-       (19, 19, 'http://lorempixel.com/640/480/'),
-       (20, 20, 'http://lorempixel.com/640/480/'),
-       (21, 21, 'http://lorempixel.com/640/480/'),
-       (22, 22, 'http://lorempixel.com/640/480/'),
-       (23, 23, 'http://lorempixel.com/640/480/'),
-       (24, 24, 'http://lorempixel.com/640/480/'),
-       (25, 25, 'http://lorempixel.com/640/480/'),
-       (26, 26, 'http://lorempixel.com/640/480/'),
-       (27, 27, 'http://lorempixel.com/640/480/'),
-       (28, 28, 'http://lorempixel.com/640/480/'),
-       (29, 29, 'http://lorempixel.com/640/480/'),
-       (30, 30, 'http://lorempixel.com/640/480/'),
-       (31, 31, 'http://lorempixel.com/640/480/'),
-       (32, 32, 'http://lorempixel.com/640/480/'),
-       (33, 33, 'http://lorempixel.com/640/480/'),
-       (34, 34, 'http://lorempixel.com/640/480/'),
-       (35, 35, 'http://lorempixel.com/640/480/'),
-       (36, 36, 'http://lorempixel.com/640/480/'),
-       (37, 37, 'http://lorempixel.com/640/480/'),
-       (38, 38, 'http://lorempixel.com/640/480/'),
-       (39, 39, 'http://lorempixel.com/640/480/'),
-       (40, 40, 'http://lorempixel.com/640/480/'),
-       (41, 41, 'http://lorempixel.com/640/480/'),
-       (42, 42, 'http://lorempixel.com/640/480/'),
-       (43, 43, 'http://lorempixel.com/640/480/'),
-       (44, 44, 'http://lorempixel.com/640/480/'),
-       (45, 45, 'http://lorempixel.com/640/480/'),
-       (46, 46, 'http://lorempixel.com/640/480/'),
-       (47, 47, 'http://lorempixel.com/640/480/'),
-       (48, 48, 'http://lorempixel.com/640/480/'),
-       (49, 49, 'http://lorempixel.com/640/480/'),
-       (50, 50, 'http://lorempixel.com/640/480/'),
-       (51, 51, 'http://lorempixel.com/640/480/'),
-       (52, 52, 'http://lorempixel.com/640/480/'),
-       (53, 53, 'http://lorempixel.com/640/480/'),
-       (54, 54, 'http://lorempixel.com/640/480/'),
-       (55, 55, 'http://lorempixel.com/640/480/'),
-       (56, 56, 'http://lorempixel.com/640/480/'),
-       (57, 57, 'http://lorempixel.com/640/480/'),
-       (58, 58, 'http://lorempixel.com/640/480/'),
-       (59, 59, 'http://lorempixel.com/640/480/'),
-       (60, 60, 'http://lorempixel.com/640/480/'),
-       (61, 61, 'http://lorempixel.com/640/480/'),
-       (62, 62, 'http://lorempixel.com/640/480/'),
-       (63, 63, 'http://lorempixel.com/640/480/'),
-       (64, 64, 'http://lorempixel.com/640/480/'),
-       (65, 65, 'http://lorempixel.com/640/480/'),
-       (66, 66, 'http://lorempixel.com/640/480/'),
-       (67, 67, 'http://lorempixel.com/640/480/'),
-       (68, 68, 'http://lorempixel.com/640/480/'),
-       (69, 69, 'http://lorempixel.com/640/480/'),
-       (70, 70, 'http://lorempixel.com/640/480/'),
-       (71, 71, 'http://lorempixel.com/640/480/'),
-       (72, 72, 'http://lorempixel.com/640/480/'),
-       (73, 73, 'http://lorempixel.com/640/480/'),
-       (74, 74, 'http://lorempixel.com/640/480/'),
-       (75, 75, 'http://lorempixel.com/640/480/'),
-       (76, 76, 'http://lorempixel.com/640/480/'),
-       (77, 77, 'http://lorempixel.com/640/480/'),
-       (78, 78, 'http://lorempixel.com/640/480/'),
-       (79, 79, 'http://lorempixel.com/640/480/'),
-       (80, 80, 'http://lorempixel.com/640/480/'),
-       (81, 81, 'http://lorempixel.com/640/480/'),
-       (82, 82, 'http://lorempixel.com/640/480/'),
-       (83, 83, 'http://lorempixel.com/640/480/'),
-       (84, 84, 'http://lorempixel.com/640/480/'),
-       (85, 85, 'http://lorempixel.com/640/480/'),
-       (86, 86, 'http://lorempixel.com/640/480/'),
-       (87, 87, 'http://lorempixel.com/640/480/'),
-       (88, 88, 'http://lorempixel.com/640/480/'),
-       (89, 89, 'http://lorempixel.com/640/480/'),
-       (90, 90, 'http://lorempixel.com/640/480/'),
-       (91, 91, 'http://lorempixel.com/640/480/'),
-       (92, 92, 'http://lorempixel.com/640/480/'),
-       (93, 93, 'http://lorempixel.com/640/480/'),
-       (94, 94, 'http://lorempixel.com/640/480/'),
-       (95, 95, 'http://lorempixel.com/640/480/'),
-       (96, 96, 'http://lorempixel.com/640/480/'),
-       (97, 97, 'http://lorempixel.com/640/480/'),
-       (98, 98, 'http://lorempixel.com/640/480/'),
-       (99, 99, 'http://lorempixel.com/640/480/'),
-       (100, 100, 'http://lorempixel.com/640/480/'); -- 100
-
-INSERT INTO `students_videos` -- 100
-VALUES (1, 1, 1),
-       (1, 36, 0),
-       (1, 71, 1),
-       (2, 2, 0),
-       (2, 37, 1),
-       (2, 72, 1),
-       (3, 3, 1),
-       (3, 38, 0),
-       (3, 73, 0),
-       (4, 4, 0),
-       (4, 39, 1),
-       (4, 74, 1),
-       (5, 5, 0),
-       (5, 40, 0),
-       (5, 75, 1),
-       (6, 6, 1),
-       (6, 41, 0),
-       (6, 76, 0),
-       (7, 7, 0),
-       (7, 42, 1),
-       (7, 77, 1),
-       (8, 8, 0),
-       (8, 43, 1),
-       (8, 78, 1),
-       (9, 9, 0),
-       (9, 44, 1),
-       (9, 79, 1),
-       (10, 10, 0),
-       (10, 45, 1),
-       (10, 80, 0),
-       (11, 11, 1),
-       (11, 46, 0),
-       (11, 81, 1),
-       (12, 12, 0),
-       (12, 47, 1),
-       (12, 82, 0),
-       (13, 13, 1),
-       (13, 48, 1),
-       (13, 83, 1),
-       (14, 14, 0),
-       (14, 49, 1),
-       (14, 84, 0),
-       (15, 15, 1),
-       (15, 50, 1),
-       (15, 85, 1),
-       (16, 16, 0),
-       (16, 51, 1),
-       (16, 86, 0),
-       (17, 17, 1),
-       (17, 52, 0),
-       (17, 87, 0),
-       (18, 18, 1),
-       (18, 53, 1),
-       (18, 88, 0),
-       (19, 19, 1),
-       (19, 54, 0),
-       (19, 89, 1),
-       (20, 20, 0),
-       (20, 55, 0),
-       (20, 90, 1),
-       (21, 21, 0),
-       (21, 56, 0),
-       (21, 91, 0),
-       (22, 22, 1),
-       (22, 57, 1),
-       (22, 92, 1),
-       (23, 23, 0),
-       (23, 58, 0),
-       (23, 93, 1),
-       (24, 24, 1),
-       (24, 59, 1),
-       (24, 94, 1),
-       (25, 25, 1),
-       (25, 60, 0),
-       (25, 95, 0),
-       (26, 26, 1),
-       (26, 61, 1),
-       (26, 96, 1),
-       (27, 27, 0),
-       (27, 62, 0),
-       (27, 97, 0),
-       (28, 28, 0),
-       (28, 63, 1),
-       (28, 98, 0),
-       (29, 29, 0),
-       (29, 64, 1),
-       (29, 99, 1),
-       (30, 30, 0),
-       (30, 65, 0),
-       (30, 100, 1),
-       (31, 31, 1),
-       (31, 66, 0),
-       (32, 32, 0),
-       (32, 67, 0),
-       (33, 33, 0),
-       (33, 68, 0),
-       (34, 34, 0),
-       (34, 69, 1),
-       (35, 35, 0),
-       (35, 70, 1);
-
-INSERT INTO `messages`
-VALUES (1, 1,
-        'Nobis quia et tempore ducimus. Exercitationem aliquam sit dolor numquam incidunt. Et at ut consequatur qui officia dolore maiores. Rerum sit debitis exercitationem repudiandae eligendi.'),
-       (2, 2,
-        'Qui culpa id quis molestias unde. Rem numquam aspernatur ipsa consequuntur soluta. Aut id et quia eaque nostrum praesentium. Maiores quia aut tempore velit qui.'),
-       (3, 3,
-        'Atque excepturi natus et sed. Sunt ipsum suscipit ut tempora enim id et. Eum ut facere ab adipisci. Facilis accusantium molestiae quibusdam id minima ut. Consectetur explicabo minus vitae ipsa ut.'),
-       (4, 4,
-        'Quia iste voluptas et culpa aut et ullam modi. Debitis cum vel accusantium sed. Et nulla aut rerum voluptatem nam nemo et.'),
-       (5, 5,
-        'Voluptatem tempora beatae sed ut. Optio et doloribus officiis rerum error et culpa. In autem aspernatur cupiditate. Dignissimos unde similique modi.'),
-       (6, 6,
-        'Facere quia fugit alias reprehenderit et. Tempore eos saepe itaque impedit quos animi. Incidunt sequi ut molestiae perspiciatis laborum porro id. Est illum aperiam magnam veniam.'),
-       (7, 7, 'Qui voluptatem eligendi officiis quisquam unde nemo. Laudantium occaecati dolore quia nihil.'),
-       (8, 8,
-        'Voluptas suscipit asperiores consequatur ipsam sunt omnis. Aliquid et voluptate voluptatem ut accusantium labore vitae.'),
-       (9, 9, 'Temporibus dolores et consequatur dolorem rerum dignissimos. Atque saepe sit quos sed.'),
-       (10, 10,
-        'Nihil dolorum itaque veritatis molestias aut occaecati sequi. Quis libero provident labore sit repellendus. Est vitae qui consequatur sequi pariatur non.'),
-       (11, 11,
-        'Id beatae ut veritatis dolorem. Perferendis consequatur officia et. Qui officiis culpa dolore eaque id voluptatem quia. Eveniet consequuntur harum blanditiis tenetur veritatis blanditiis dicta.'),
-       (12, 12,
-        'Eum culpa quo nobis consequuntur non dolorum dignissimos et. Fuga nobis et aut aut dolores. Omnis quisquam voluptates deserunt. At vel voluptate veritatis et tenetur aut rerum.'),
-       (13, 13,
-        'Hic omnis voluptatem sunt et nihil nihil. Rem molestias maiores nihil est voluptates occaecati. Quia aut natus ipsum. Nihil omnis consequatur quo.'),
-       (14, 14,
-        'Laboriosam aliquam unde qui repellendus distinctio. Ipsa rerum laboriosam molestiae dolores hic vel repellendus. Similique consequatur eaque corporis necessitatibus debitis itaque rerum aliquid.'),
-       (15, 15,
-        'Assumenda et dolorem eveniet amet sed aut. Velit esse quae ipsum cupiditate cupiditate. Necessitatibus alias tempore quisquam atque. Omnis voluptatem asperiores est nihil et.'),
-       (16, 16,
-        'Sit et repellendus distinctio ratione est. Illum tempore et inventore eligendi est ipsum doloremque nulla. Vel dicta cum exercitationem eveniet.'),
-       (17, 17,
-        'Repellendus at est aut molestiae voluptatem. Cumque ea expedita officiis qui. Voluptatem qui officia quia non voluptas rerum cum.'),
-       (18, 18,
-        'Natus omnis molestiae reprehenderit quas in accusantium. Commodi alias aut suscipit libero assumenda sunt. Eos doloremque debitis fugiat autem atque.'),
-       (19, 19,
-        'Quis ad doloremque eaque et et. Asperiores pariatur harum laboriosam qui. Nesciunt quaerat qui qui necessitatibus alias doloremque molestiae. Fugiat illum qui nostrum debitis.'),
-       (20, 20,
-        'Doloremque iusto quidem inventore delectus voluptate sit ducimus aut. Hic vero iusto cupiditate quia. Fugiat sunt natus debitis et. Quo alias quisquam non ut.'),
-       (21, 21,
-        'Animi quibusdam doloribus dolorum. Qui aut tempore in non. Excepturi et autem dignissimos et est at ex. Eum aperiam tempore molestiae.'),
-       (22, 22,
-        'Cum dolores corporis fugiat natus quae explicabo. Qui officiis veniam temporibus nemo explicabo porro. Eius mollitia ea omnis eum. Repellendus ut corrupti esse debitis et similique incidunt.'),
-       (23, 23,
-        'Recusandae earum quisquam nobis non. Nesciunt iste dolores nam necessitatibus itaque. Culpa sed et ab cum aliquam blanditiis nihil.'),
-       (24, 24,
-        'Officiis et debitis fuga aliquam consequatur delectus. Quam quo quae ducimus aut ducimus. Qui sit ut asperiores officiis repellat ullam.'),
-       (25, 25,
-        'Aut itaque officia beatae nesciunt laborum odio. Quasi nihil officiis quo quam. Delectus earum cupiditate ut nulla molestias praesentium officia.'),
-       (26, 26,
-        'Aut eos tenetur numquam quos itaque et. Qui voluptatem nostrum architecto laborum et omnis. Temporibus qui maiores cum et a. Voluptatum et non in culpa ipsa mollitia quia.'),
-       (27, 27,
-        'Rerum et voluptatem earum ea. Dolores et sequi repellendus in vel quis dolorem.\nPlaceat rerum voluptatibus praesentium omnis est. Perferendis aliquid fuga eum odit dolores soluta.'),
-       (28, 28,
-        'Exercitationem corporis dolorum sit accusantium molestiae dolorem iste. Distinctio ut nihil architecto voluptatibus. Aut qui et fugit voluptate. Beatae dolor expedita quaerat.'),
-       (29, 29,
-        'Dolorum hic sed ad deserunt optio odio minus. Quod sed explicabo dignissimos quidem consequatur accusamus minus.'),
-       (30, 30, 'Illo odio ipsam atque labore nemo. Totam consequatur non nihil. Eum officia exercitationem sunt est.'),
-       (31, 31,
-        'Amet in at et ut quam omnis. Qui minima quia laboriosam voluptas ipsam illum. Et quo vitae quia sit perferendis qui.'),
-       (32, 32,
-        'Dolor nemo accusantium pariatur sunt non. Aliquid dolorem non expedita aut numquam est ullam. Excepturi facere et harum ipsam. Velit animi rerum assumenda libero a atque maiores earum.'),
-       (33, 33,
-        'Vel ex nesciunt laboriosam tempore. Sed voluptatibus quia corporis officia impedit explicabo. Hic quasi ducimus repellendus non eligendi itaque autem. Eum ut quod totam dicta.'),
-       (34, 34,
-        'Est dolore est nostrum nam quis. Est et est dolores. Quod eum ut mollitia impedit. Officiis similique ea illo dolore quis quod saepe perspiciatis. Eaque ea numquam et molestiae quia autem.'),
-       (35, 35,
-        'Ut aspernatur dolorum animi blanditiis in ratione. Temporibus voluptatem dolorum qui aliquam nulla facere voluptas aut. Maxime praesentium nihil beatae saepe.'),
-       (36, 36,
-        'Quibusdam laboriosam aliquam quos in. Corporis natus perferendis neque qui sit omnis.\nDolorem laboriosam quaerat vel minus voluptas quasi repudiandae. Doloribus soluta modi consequuntur hic.'),
-       (37, 37,
-        'In autem est deserunt quos dolorem voluptatem. Omnis officia rerum beatae tenetur in. Quod necessitatibus eos in non ea eaque. Laborum aspernatur vel eaque exercitationem.'),
-       (38, 38,
-        'Quia nemo dolorum ut aliquid maxime praesentium ab. Sequi laborum labore molestiae ratione voluptatem quos laboriosam.'),
-       (39, 39,
-        'Non ullam ab totam soluta. Reiciendis autem nam sint aliquid natus illum omnis modi. Nostrum tenetur beatae aut soluta error ullam repellat dolorem.'),
-       (40, 40,
-        'Reprehenderit iure dolore consectetur eum aut. Explicabo enim dicta ut beatae qui quas ad. Praesentium nesciunt dolores sed voluptatibus laudantium voluptas. Consequatur ut et perferendis similique.'),
-       (41, 41,
-        'Ut voluptatem ratione eius necessitatibus dicta omnis quae unde. Quia illum et architecto ex. Eaque assumenda quam voluptas nesciunt aspernatur.'),
-       (42, 42,
-        'Sit tenetur ea temporibus sit et. Cum aut numquam quibusdam. Sed aut sequi est expedita maiores aperiam. Corrupti ut et quis dolorem.'),
-       (43, 43,
-        'Voluptatem nihil eum unde animi molestiae non et. Omnis veniam ipsa nihil. Laborum doloribus asperiores natus non maiores est. Ut quidem ipsa sunt tenetur corporis.'),
-       (44, 44,
-        'Eum placeat ea voluptates quas. Velit quibusdam eum laudantium et. Inventore corrupti incidunt quia iusto odio explicabo.'),
-       (45, 45,
-        'Facilis ut facilis consectetur enim consequatur sit qui. Vitae ut et aspernatur omnis quaerat. Rerum et velit fugit qui totam iusto voluptatibus. Et tempora ipsam quasi rerum minima est molestias.'),
-       (46, 46,
-        'Enim fugit dolorem laudantium reiciendis excepturi. Illo ut cum neque quaerat. Ex ut sit cum commodi vero.'),
-       (47, 47,
-        'Quisquam possimus sint sunt vitae. Autem similique itaque quidem officia sit ducimus tenetur. Corporis minus qui et autem quia quidem dolorum. Quidem laboriosam minima reprehenderit soluta.'),
-       (48, 48,
-        'Qui totam sit recusandae. Assumenda et ut quis magni. Soluta quia vel quia numquam atque est reiciendis quam. Omnis odit quae tempore ullam.'),
-       (49, 49,
-        'Accusantium nihil facilis non et. Esse ut dolorem autem natus id corporis. Ut autem repellat quas et porro.'),
-       (50, 50,
-        'In velit ut quia incidunt magni consequatur. Atque dolore in qui reiciendis corporis a rem. Quam est laudantium recusandae reiciendis. Facere debitis sed non.'),
-       (1, 1,
-        'Tempora nesciunt dolorem facere odit fugiat dolores. Nihil magnam cumque ut nisi commodi quo quia optio. Harum et vero et sint distinctio sunt.'),
-       (2, 2,
-        'Esse sit ipsa et quibusdam consequatur aut minus. Cumque rerum aliquid animi neque necessitatibus dicta eum.'),
-       (3, 3,
-        'Amet impedit ut fugit earum rerum amet et. Libero est eveniet non neque voluptas aut reiciendis. Minus exercitationem aut cum ab rerum mollitia. Quia reiciendis sunt quo et ut neque blanditiis.'),
-       (4, 4,
-        'Temporibus enim sint praesentium distinctio hic nam. Repellat maxime molestiae praesentium eum ut iste. Dolor quidem repellendus totam saepe et.'),
-       (5, 5,
-        'Officiis autem officiis quam et corrupti illum eveniet. Voluptates quo esse nihil quis voluptatem. Mollitia eligendi ducimus consequatur corporis placeat perferendis dolorem.'),
-       (6, 6,
-        'Saepe qui ea et debitis. In illum et temporibus sapiente. Quo ut est excepturi soluta ut et accusantium. Numquam vero fugit molestias eius.'),
-       (7, 7,
-        'Voluptas assumenda eveniet cupiditate et sunt. A sequi et consectetur accusantium et. Voluptas distinctio veritatis sequi asperiores. Id illum voluptas porro minus corporis officiis expedita ut.'),
-       (8, 8,
-        'Saepe esse voluptas atque et ut sit. Dolorem ut doloribus nesciunt minus. Necessitatibus animi amet qui.'),
-       (9, 9,
-        'Sed quis nam rem id quam. Expedita tempore non distinctio iste doloremque voluptatem.\nQuis ut illo sint corrupti placeat eius. Aliquid rem laborum voluptatem aperiam.'),
-       (10, 10,
-        'Cumque nulla excepturi eligendi eum et quos dolor sit. Explicabo quia provident in placeat nihil. Amet dolor doloribus et ducimus. Nulla corrupti consequuntur ut voluptatem dolorem error.'),
-       (11, 11, 'Sed et distinctio ad quibusdam. Debitis dolorem eos vitae quas.'),
-       (12, 12,
-        'Ea praesentium neque ducimus ea. Labore neque eveniet est non eligendi. Repudiandae earum commodi blanditiis.'),
-       (13, 13,
-        'Architecto doloremque maiores non fugiat. Temporibus ut quod dolor qui adipisci earum. Mollitia numquam veniam facilis dolorem asperiores. Debitis aut nulla ex dolore possimus rerum.'),
-       (14, 14,
-        'Fugit veritatis quis omnis excepturi. Dolor nemo sed id rerum quis. Labore tempore culpa in eos sed impedit odit modi. Repellat nihil veniam dicta quasi rerum id. Culpa totam aut velit ut laborum.'),
-       (15, 15,
-        'Ipsum cumque necessitatibus illum eum repellat sint. Velit nemo commodi consequuntur vero. Consequatur numquam quia mollitia consequatur.'),
-       (16, 16,
-        'Molestias nemo laudantium numquam. Quidem illo ut fugit et dolores non. Tempora sit voluptas in impedit iure inventore.'),
-       (17, 17,
-        'Laboriosam perferendis et natus. Eum sint magnam quia quidem cumque saepe vitae. Vel quia reiciendis est laboriosam saepe. Amet officiis ipsam sunt ducimus omnis officia.'),
-       (18, 18,
-        'Inventore quod enim possimus. Assumenda enim est qui voluptatibus. Ut est nostrum aut aliquam nihil enim.'),
-       (19, 19, 'Distinctio voluptatem odit deleniti sunt. Nesciunt voluptatem eveniet in. Qui atque quas hic quasi.'),
-       (20, 20,
-        'Ipsa illum voluptatum inventore consequatur. Voluptas illum in labore cupiditate et temporibus. Ut harum ipsam ullam occaecati veniam veniam.'),
-       (21, 21,
-        'Aliquam atque quis et quasi recusandae. Quam ab commodi eum quis porro ratione. Aut ut officiis consequuntur quia repellat facilis blanditiis. Aliquam explicabo et iusto animi quidem dolor natus.'),
-       (22, 22,
-        'Dolor ea temporibus impedit nulla. Et unde ratione dolor ducimus eos iure vel. Non quis fuga reiciendis et.'),
-       (23, 23, 'Commodi quia qui aut et facilis asperiores. Dolores et vero fugit dolores. Incidunt cumque enim id.'),
-       (24, 24,
-        'Non architecto sed quibusdam laudantium. Voluptatibus voluptas incidunt eveniet explicabo laudantium voluptatum et. Necessitatibus et repellendus aut perspiciatis eius qui aliquid.'),
-       (25, 25,
-        'Quis vel aperiam accusantium impedit quia dolorem quia. Deserunt nam officiis eius nesciunt soluta et cum sed. Quam velit et voluptas ipsa. Facere molestiae magni tempora fugiat possimus odio qui.'),
-       (26, 26,
-        'Modi eum nobis sunt dolores. Error sapiente id officiis asperiores voluptate sed sit quibusdam. Laboriosam laudantium dolores suscipit repudiandae dolores dolorem.'),
-       (27, 27,
-        'Est illo quam excepturi odit iusto eos consequatur. Ut consectetur voluptatem id aut magnam voluptates. Consectetur nobis quo dolores deleniti distinctio et.'),
-       (28, 28,
-        'Deserunt nemo ab et minima nihil aliquid. Reprehenderit voluptatem omnis dolorum magnam omnis velit repellendus et. Id nesciunt veritatis dolor velit quae non dolor.'),
-       (29, 29,
-        'Debitis unde earum reprehenderit magnam vero. Nihil deleniti quisquam exercitationem totam aut occaecati. Provident consectetur consectetur tenetur.'),
-       (30, 30, 'Et quidem nihil nam qui explicabo placeat. Et voluptatem blanditiis qui commodi soluta nemo tempora.'),
-       (31, 31,
-        'Officia consequatur blanditiis velit velit nulla. Dolores sit dolorem repellendus qui. Dolores molestias modi modi rerum blanditiis unde nihil.'),
-       (32, 32,
-        'Expedita rerum asperiores omnis quo consequatur sapiente. Sit iste impedit facere. Quos odit dolorem quis consequuntur et labore. Est et eaque voluptas nam rerum cumque dolore.'),
-       (33, 33,
-        'Ut enim doloribus dolor est sint velit. Quo corrupti nam maxime illum porro vitae. Tempora alias doloribus fugiat possimus laboriosam deserunt.'),
-       (34, 34,
-        'Dolores suscipit doloribus quis molestiae vel officiis consequatur. Aut autem illum sed in molestiae neque iusto.'),
-       (35, 35,
-        'Nihil autem magnam quisquam ut sunt explicabo. Alias nemo qui sunt id excepturi adipisci cum. Velit rem voluptatem cumque.'),
-       (36, 36,
-        'Est id totam harum laboriosam occaecati id. Mollitia saepe commodi quo quidem voluptates quis. Quo saepe ut quae enim. Assumenda ut corporis vitae magni mollitia.'),
-       (37, 37,
-        'Voluptatem aliquam dignissimos itaque aliquam officia aut repellendus. Amet quis doloremque quia voluptatibus in rem sequi. Illum magni sit harum. Magnam neque omnis dolorum veniam incidunt voluptas.'),
-       (38, 38,
-        'Ut fugit ea quaerat ratione. Aut suscipit hic nam aspernatur. Est ut non id explicabo eos doloribus. Molestiae molestias recusandae debitis sit porro quia itaque.'),
-       (39, 39,
-        'Saepe vero placeat repellat doloremque sit magni. Nam dolor et omnis eligendi. Quisquam blanditiis officia optio impedit.'),
-       (40, 40,
-        'Consequatur aut commodi repellat qui excepturi quis praesentium. Architecto aut ipsam atque nostrum ut recusandae deserunt. Error reprehenderit eaque possimus assumenda.'),
-       (41, 41,
-        'Id totam corrupti fugiat perferendis ut est consequuntur. Qui voluptas ut odit quia deserunt. Error iure velit similique. Omnis id et unde quia.'),
-       (42, 42,
-        'Ducimus odio ut ut facere. Quisquam sapiente molestias esse veritatis maxime maxime. Sit molestiae non ut in iure eius.'),
-       (43, 43,
-        'Aliquid minima ratione nemo vel quis. Et atque commodi voluptas in. Vero commodi dolorem repellat et placeat est sint.'),
-       (44, 44,
-        'Consequatur deleniti quia eos accusantium iure. Excepturi nulla vel quod quis. Ea qui deleniti ea. Harum temporibus aut quia aliquam ipsum ad.'),
-       (45, 45,
-        'Neque numquam at facilis molestias architecto sint nesciunt. Eos dolores qui voluptas quia error. Et quaerat blanditiis et adipisci delectus vitae in.'),
-       (46, 46,
-        'Dolore temporibus consequatur possimus autem magnam ratione. Dolore sit et suscipit occaecati consectetur. Culpa magnam rem quisquam nulla. Rem error et molestiae dolorem.'),
-       (47, 47,
-        'Consectetur natus rem rerum cumque alias iure. Aliquid illo perferendis libero fugit officia qui ullam. Autem necessitatibus sit voluptatum autem et qui. Illo iste magni voluptatem.'),
-       (48, 48,
-        'Cum consequatur similique accusamus omnis sapiente aut. Enim qui iste qui est rem maxime quia. Corporis inventore rerum est voluptatem. Laboriosam enim et ipsa deserunt dolorum.'),
-       (49, 49,
-        'Est impedit repudiandae dolor reprehenderit laboriosam fugit minima. Ea corporis enim asperiores quis qui. Architecto laboriosam sapiente eum consequuntur iusto reiciendis quae in.'),
-       (50, 50,
-        'Voluptatem culpa quia dicta beatae et. Magni inventore deleniti autem ut facere sed. Dolor cum illo cupiditate incidunt eos cumque culpa.'); -- 100

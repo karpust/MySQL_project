@@ -209,9 +209,11 @@ create table schedule(
     group_id bigint unsigned not null,
     lesson_number tinyint(2) unsigned not null,
     course_id bigint unsigned not null,
+    mentor_id bigint unsigned not null,
     foreign key (teacher_id) references teachers(user_id),
     foreign key (group_id) references edu_groups(id),
-    foreign key (course_id) references courses(id)
+    foreign key (course_id) references courses(id),
+    foreign key (mentor_id) references students(user_id)
 ) comment 'расписание';
 
 
@@ -241,7 +243,6 @@ create table students_practicals(
 
 
 -- проверенные преподавателем практические задания студентов:
--- если препод поставил оценку, студент получает сообщение что проверено(триггер)
 drop table if exists teachers_practicals;
 create table teachers_practicals(
     teacher_id bigint unsigned not null,
@@ -286,6 +287,16 @@ create table teachers_practicals(
 #     foreign key (video_id) references videos(id)
 # );
 
+drop table if exists messages;
+create table messages(
+    from_id bigint unsigned not null,
+    to_id bigint unsigned not null,
+    content text,
+    date datetime default now(),
+    foreign key (from_id) references users(id),
+    foreign key (to_id) references users(id)
+) comment 'сообщения';
+
 
 drop table if exists reviews;
 create table reviews(
@@ -321,13 +332,4 @@ create table mentor_ratings(
     foreign key (from_student) references students(user_id)
 ) comment 'оценка наставнику';
 
-
-drop table if exists messages;
-create table messages(
-    from_id bigint unsigned not null,
-    to_id bigint unsigned not null,
-    content text,
-    foreign key (from_id) references users(id),
-    foreign key (to_id) references users(id)
-) comment 'сообщения';
 
