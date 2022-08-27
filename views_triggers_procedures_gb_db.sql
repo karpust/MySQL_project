@@ -1,42 +1,13 @@
-select '15:00:00' <= TIME('2009-05-18 15:45:57.005678') <= '20:00:00';
-select TIME('2009-05-18 15:45:57.005678') >= '20:00:00';
-select '16'>=hour('2009-05-18 15:45:57.005678')>='14';
-select hour('2009-05-18 15:45:57.005678')>='14' and '16'>=hour('2009-05-18 15:45:57.005678');
-select hour(TIME('2009-05-18 15:45:57.005678'));
-select dayname(TIME('2009-05-18 15:45:57.005678'));
-
-select hour(timediff('2009-05-18 15:45:57.005678', '2009-05-16 18:45:57.005678'));
-select  timestampdiff(DAY, '2009-05-18 15:45:57.005678', '2009-05-16 15:45:57.005678') ;
-select hour(timediff('2009-05-16 18:45:57.005678', '2009-05-18 15:45:57.005678'));
-select timestampdiff(hour, '2009-05-16 18:45:57.005678', '2009-05-18 15:45:57.005678');
-
-select DATEDIFF('2009-05-18 14:45:57.005678', '2009-05-16 15:45:57.005678') = 2;
-select  minute(TIMEDIFF('2009-05-18 14:45:57.005678', '2009-05-16 14:45:57.005678'))= 2;
-select TIMEDIFF('2009-05-18 14:45:57.005678', '2009-05-16 15:45:57.005678');
-select DATEDIFF('2009-05-18 14:45:57.005678', '2009-05-16 15:45:57.005678');
-select minute(TIMEDIFF('2009-05-18 14:45:57.005678', '2009-05-16 15:45:57.005678'));
-select hour(TIMEDIFF('2009-05-18 14:45:57.005678', '2009-05-16 15:45:57.005678'));
-select mod(TIME('2009-05-18 15:00:00'), 1) = 0;
-select current_timestamp;
-select max(lesson_number) from schedule where course_id = 1;
-select timestampdiff(day, '2009-05-16 15:40:00', '2009-05-18 15:30:00') < 2;
-
--- --------------------------------------------------------------------------------------------------------
--- хп вставки в edu_groups и проверки согласованности данных с specializations_programms:
+-- триггер проверки согласованности данных с specializations_programms при вставке в edu_groups:
 DELIMITER //
-DROP PROCEDURE IF EXISTS edu_groups_fill_sp//
-CREATE PROCEDURE edu_groups_fill_sp(p_name varchar(255), p_special_id  int, p_programm_id int)
+DROP PROCEDURE IF EXISTS edu_groups_check_before_insert//
+CREATE TRIGGER edu_groups_check_before_insert BEFORE INSERT ON edu_groups
+    FOR EACH ROW
     BEGIN
-        DECLARE `msg` VARCHAR(100);
-        IF exists (select 1 from specializations_programms where programm_id = p_programm_id
-        and special_id = p_special_id)
-            THEN INSERT INTO edu_groups(name, special_id, programm_id)
-                 values(p_name, p_special_id, p_programm_id);
-            SET `msg` := 'Согласованность данных не нарушена';
-        ELSE
-            SET `msg` := 'Ошибка добавления данных. Нарушение согласованности';
+        IF NOT EXISTS (select 1 from specializations_programms where programm_id = new.programm_id
+        and special_id = new.special_id) THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! Specialization does not match the program';
         END IF;
-        SELECT `msg`;
     END//
 DELIMITER ;
 
@@ -124,11 +95,10 @@ DELIMITER ;
 
 
 /* хп заполняет schedule в соотв с основными условиями:
-
-   ведет ли препод такой курс +
+   ведет ли препод такой курс 
    есть ли у группы такой курс
-   есть ли в курсе урок с таким номером +
-   время уроков с 10 до 20 +
+   есть ли в курсе урок с таким номером 
+   время уроков с 10 до 20 
    уроки по порядку для каждой группы(номер урока курса для группы)
    чтобы у одной группы или препода не было одновременно уроков(разница в 5 часов)
    */
@@ -187,22 +157,8 @@ END //
 DELIMITER ;
 
 
-SHOW TRIGGERS;
-
-
--- для составления расписания создам вью:
--- вью все курсы препода:
-# CREATE OR REPLACE VIEW `courses_by_teacher` AS
-#     SELECT
-#         t.user_id AS teacher_id,
-#         concat((select group_concat(c.id) from courses c
-#             join courses_teachers ct on c.id = ct.course_id
-#             where ct.teacher_id = t.user_id)) as courses_id
-#     FROM teachers t;
-#
-# SELECT * FROM courses_by_teacher;
-
--- вью все курсы группы:
+-- вью для составления расписания:
+-- все курсы группы:
 CREATE OR REPLACE VIEW courses_by_group AS
     SELECT
         group_id,
@@ -218,27 +174,7 @@ CREATE OR REPLACE VIEW courses_by_group AS
     join specializations_courses sc on s.id = sc.spec_id
     join courses c2 on sc.course_id = c2.id)) as tab ORDER BY group_id;
 
-SELECT * FROM courses_by_group;
-
-# CREATE OR REPLACE VIEW courses_by_group AS
-#     SELECT
-#         eg.id AS group_id,
-#         (SELECT GROUP_CONCAT(c.id) FROM
-#         (SELECT DISTINCT c.id
-#     FROM courses c
-#     JOIN programms_courses pc on c.id = pc.course_id
-#     JOIN programms p ON pc.programm_id = p.id
-#     JOIN edu_groups eg1 on p.id = eg.programm_id
-#         where eg1.id = eg.id
-#     UNION
-#     (SELECT DISTINCT c2.id
-#     FROM courses c2
-#     JOIN specializations_courses sc on c2.id = sc.course_id
-#     JOIN specializations spec ON sc.spec_id = spec.id
-#     JOIN edu_groups eg2 on spec.id = eg.special_id
-#             where eg2.id = eg.id))AS c) AS courses
-#     FROM edu_groups eg;
-
+-- SELECT * FROM courses_by_group;
 
 
 -- триггер заполнения students_practicals в соответствии сo schedule :
@@ -269,23 +205,21 @@ DELIMITER ;
 
 
 -- вью дата старта уроков у студентов: student_id, lesson_id, date
-CREATE OR REPLACE VIEW students_lessons_date AS
-    select
-        s.user_id as student_id,
-        l.id as lesson_id,
-        sc.date as date
-from students s
-join edu_groups eg on s.group_id = eg.id
-join courses_by_group cbg on s.group_id = cbg.group_id
-join lessons l on cbg.course_id = l.course_id
-join schedule sc on l.course_id = sc.course_id and l.number = sc.lesson_number and eg.id = sc.group_id;
+-- CREATE OR REPLACE VIEW students_lessons_date AS
+--     select
+--         s.user_id as student_id,
+--         l.id as lesson_id,
+--         sc.date as date
+-- from students s
+-- join edu_groups eg on s.group_id = eg.id
+-- join courses_by_group cbg on s.group_id = cbg.group_id
+-- join lessons l on cbg.course_id = l.course_id
+-- join schedule sc on l.course_id = sc.course_id and l.number = sc.lesson_number and eg.id = sc.group_id;
 
-# select * from students_lessons_date;
+-- select * from students_lessons_date;
 
 
--- триггер для заполнения teachers_practicals.
--- проверяет что пз соотв курсу на кот учится студент и кот ведет препод
--- а также в teachers_practicals должны соотв students_practicals
+-- триггер для заполнения teachers_practicals:
 DELIMITER //
 DROP TRIGGER IF EXISTS teachers_practicals_check_before_insert//
 CREATE TRIGGER teachers_practicals_check_before_insert BEFORE INSERT ON teachers_practicals
@@ -325,7 +259,7 @@ from students s
     join schedule sc on l.course_id = sc.course_id and l.number = sc.lesson_number and eg.id = sc.group_id
     join teachers t on sc.teacher_id = t.user_id;
 
-# select * from teacher_student_practical;
+-- select * from teacher_student_practical;
 
 
 -- триггер на сообщения, нельзя отправлять себе
@@ -337,20 +271,45 @@ BEGIN
     IF new.from_id = new.to_id THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! User can not send messages for yourself';
     END IF;
+
+    IF exists(select 1 from messages where from_id = new.from_id and
+        to_id = new.to_id and date = new.date) THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error! Duplicate message';
+    END IF;
 END //
 DELIMITER ;
 
 
--- --------------------------------------------------------------------------------------------------
+-- триггер: преподаватель посылает студенту сообщение о том, что проверил практическое задание:
+DELIMITER //
+DROP TRIGGER IF EXISTS job_checked_after_insert//
+CREATE TRIGGER job_checked_after_insert AFTER INSERT ON teachers_practicals
+    FOR EACH ROW
+    BEGIN
+        SELECT teacher_id, student_id, practical_id INTO @teacher_id, @student_id, @practical_id
+                                                    FROM teachers_practicals ORDER BY date desc LIMIT 1;
 
+        SET @student_name = (SELECT CONCAT(u.firstname, ' ', u.lastname)
+        FROM teachers_practicals tp join users u on tp.student_id = u.id
+        where u.id = @student_id and tp.practical_id = @practical_id);
 
+        SET @course_name = (SELECT c.title FROM courses c
+        JOIN courses_by_group cbg ON c.id = cbg.course_id
+        JOIN students s ON cbg.group_id = s.group_id
+        JOIN lessons l ON c.id = l.course_id
+        WHERE l.id = @practical_id AND s.user_id = @student_id);
 
--- reviews в соотв с курсом кот прошел студент
--- хп заполняет teacher_ratings проверяя что студент отучился на курсе кот вел препод
--- хп заполняет mentor_ratings проверяя что студент отучился на курсе на кот был этот ментор
--- хп заполняет табл скидки, проверяет что дата до старта программы и проверяет начало не в одно время
+        SET @lesson_number = (SELECT l.number FROM lessons l
+        JOIN students_practicals sp ON sp.practical_id = l.id
+        WHERE l.id = @practical_id AND sp.student_id = @student_id);
 
-/* только после этого данные в базе будут согласованными и можно будет делать вьюшки */
+        SET @message_content = CONCAT('Здравствуйте, ', @student_name, '! Ваше практическое задание на курсе "', @course_name, '" к уроку ', @lesson_number, ' проверено.');
+
+        INSERT INTO messages (`from_id`, `to_id`, `content`) VALUES (@teacher_id, @student_id, @message_content);
+    END //
+DELIMITER ;
+
+SHOW TRIGGERS;
 
 
 /* показывает студента, его группу, программу обучения, специализацию,
@@ -362,31 +321,25 @@ CREATE OR REPLACE VIEW student_info
            CONCAT(g.name, '_', g.id) AS group_name,
            CONCAT(p.id, '. ', p.title) AS programm,
            CONCAT(spec.id, '. ', spec.name) AS specialization,
-           CONCAT((SELECT GROUP_CONCAT(cbg.course_id SEPARATOR '; ')
-               from students s
-               join edu_groups eg on s.group_id = eg.id
-               join courses_by_group cbg on eg.id = cbg.group_id
-               where s.user_id = u.id)) AS courses,
-           CONCAT((SELECT GROUP_CONCAT(CONCAT(u2.lastname, ', ', u2.firstname) SEPARATOR '; ')
+           GROUP_CONCAT(cbg.course_id SEPARATOR '; ') AS courses,
+           (SELECT GROUP_CONCAT( distinct CONCAT(u2.lastname, ', ', u2.firstname) SEPARATOR '; ')
                    FROM users u2
                    JOIN teachers t on u2.id = t.user_id
-                   join courses_teachers ct on t.user_id = ct.teacher_id
-                   join courses_by_group cbg on ct.course_id = cbg.course_id
-                   JOIN edu_groups eg on cbg.group_id = eg.id
-                   JOIN students s on eg.id = s.group_id
-                   WHERE s.user_id = u.id)) AS teachers,
+                   join schedule sc on t.user_id = sc.teacher_id
+                   where sc.group_id = g.id) AS teachers,
+
            (select COUNT(s1.user_id) FROM students s1
                                        WHERE s1.group_id = g.id) AS number
     FROM users u
     JOIN students s ON u.id = s.user_id
     JOIN edu_groups g ON s.group_id = g.id
+    join schedule sc on g.id = sc.group_id
+    JOIN courses_by_group cbg on sc.group_id = cbg.group_id
     JOIN specializations spec on g.special_id = spec.id
-    JOIN programms p on g.programm_id = p.id;
+    JOIN programms p on g.programm_id = p.id
+    group by s.user_id;
 
-SELECT * FROM student_info;
-
-
-
+-- SELECT * FROM student_info;
 
 
 /* отображает все не законченные курсы студента
@@ -398,9 +351,11 @@ SELECT
     u.id AS ID,
     CONCAT(u.lastname, ' ', u.firstname) AS student,
     cbg.course_id AS courses,
-    concat((SELECT GROUP_CONCAT(l2.id)
-            FROM lessons l2
-            where l2.id = l.number)) AS lesson_numbers,
+    group_concat(l.number) as number,
+    (select sc.date
+        from schedule sc
+        where course_id = cbg.course_id and lesson_number = 1 and group_id = eg.id
+        ) as start_course,
     t.user_id AS teacher
 FROM users u
          join students s on u.id = s.user_id
@@ -411,148 +366,12 @@ FROM users u
          join lessons l on cbg.course_id = l.course_id
          join practicals p on l.id = p.lesson_id
 where not exists (select 1 from students_practicals where student_id = u.id and practical_id = l.id)
+group by l.course_id, s.user_id
+order by s.user_id
 ;
 
-SELECT * FROM students_debt_info;
+-- SELECT * FROM students_debt_info;
+
+# SHOW TRIGGERS;
 
 
--- вью показывает всех преподов программы и их рейтинг
-
-# вью показывает оценки курсу, преподавателю, ментору от студентов:
-# (курс - отзыв - препод - оценка - ментор - оценка - студент)
-# CREATE OR REPLACE VIEW rating_from_students
-#     AS
-#     SELECT
-#         s.user_id AS student_from,
-#         eg.id AS by_group,
-#         c.id AS to_course,
-#         cr.content AS course_review,
-#         t.user_id AS to_teacher,
-#         tr.rating AS teacher_rating
-# #         s.user_id AS to_mentor,
-# #         mr.rating AS mentor_rating
-#
-# FROM users u
-# JOIN students s on u.id = s.user_id
-# JOIN edu_groups eg on s.group_id = eg.id
-# JOIN courses c on eg.id = c.group_id
-# JOIN course_names cn on cn.id = c.course_name_id
-# JOIN reviews cr on s.user_id = cr.from_student and c.id = cr.to_course
-# JOIN teacher_ratings tr on s.user_id = tr.from_student
-# JOIN teachers t on tr.to_teacher = t.user_id
-# JOIN mentor_ratings mr on s.user_id = mr.from_student
-# JOIN students s2 on mr.to_mentor = s2.user_id
-# ;
-#
-# SELECT * FROM rating_from_students;
-
-
-
-create or replace view gr_st_course as
-    select distinct
-        eg.id as group_id,
-        s.user_id as student_id,
-        (select group_concat(distinct c.id)
-            from students s
-    join edu_groups g on s.group_id = g.id
-    join courses c on g.id = c.group_id
-            where g.id = eg.id )
-    as cours_id
-    from
-    users u
-join students s on u.id = s.user_id
-join edu_groups eg on s.group_id = eg.id
-join courses c on c.group_id = eg.id;
-
-
-
-
-
-
-/*-------------------------------------------------------------------------------------------------------*/
-select group_concat(distinct u.id, u.lastname order by u.id separator ', ') as user_info
-from users u;
-
--- студент - группа - курс - препод таблица преподов студента с id=3:
-SELECT u.id, u.firstname, u.lastname, eg.name as group_name, c.group_id, teacher_id, c.id as course_id
-from users u
-         inner join students s on u.id = s.user_id
-         inner join edu_groups eg on eg.id = s.group_id
-         inner join courses c on c.group_id = eg.id
-         inner join teachers t on t.user_id = c.teacher_id
-where s.user_id = 1;
-
--- таблица всех преподов студента с id=3(препод - курс - наимен курсов - группа - студент):
-SELECT u.id, concat(u.firstname, ' ', u.lastname) as teacher_name,
-       eg.name as group_name, c.group_id, s.user_id as student_id,
-       cn.title as course_name
-from users u
-         inner join teachers t on u.id = t.user_id
-         inner join courses c on t.user_id = c.teacher_id
-         inner join course_names cn on c.course_name_id = cn.id
-         inner join edu_groups eg on c.group_id = eg.id
-         inner join students s on eg.id = s.group_id
-where s.user_id = 3;
-
-/* показывает все практические задания которые не сделал студент */
-
-select group_concat(distinct u.id, u.lastname order by u.id separator ', ') as user_info
-from users u;
-
-select group_concat(distinct concat(u.id, ' ', u.lastname) order by u.id separator ', ') as user_info
-from users u;
-
-select COUNT(s.user_id) AS number
-FROM students s
-         INNER JOIN edu_groups eg on s.group_id = eg.id
-WHERE s.group_id = 2;
-
-# курс по группе по программе по специализации:
-SELECT GROUP_CONCAT(DISTINCT tab2.DDDD) AS TB1 FROM
-(SELECT DISTINCT cn.id AS DDDD FROM course_names cn
-# (SELECT GROUP_CONCAT(DISTINCT cn.id) AS DDDD FROM course_names cn
-     JOIN programms_course_names pcn on cn.id = pcn.course_name_id
-     JOIN programms p ON pcn.programm_id = p.id
-     JOIN edu_groups eg on p.id = eg.programm_id
-     JOIN students s on eg.id = s.group_id
-              WHERE s.user_id = 1
-UNION
-(SELECT DISTINCT cn.id FROM course_names cn
-# (SELECT GROUP_CONCAT(DISTINCT cn.id) FROM course_names cn
-     JOIN specializations_course_names scn on cn.id = scn.course_name_id
-     JOIN specializations spec ON scn.spec_id = spec.id
-     JOIN edu_groups eg on spec.id = eg.programm_id
-     JOIN students s on eg.id = s.group_id
-              WHERE s.user_id = 1)) AS tab2;
-
-
-select programm_id, special_id from edu_groups
-    where exists (select 1 from specializations_programms where programm_id = edu_groups.programm_id
-        and special_id = edu_groups.special_id);
-
-
--- ----------------------------------------------------------------------------------------------------------------
-
--- триггер отправка сообщения от ментора при старте курса
--- if scedule.date = current_timestamp чтобы отправить сообщение надо кудато сделать запись ...
--- если время в расписании = сейчас, и номер урока 1, функция сравнивает даты в расписании с сегодняшней
--- кто запускает ф-ю?
-# DROP EVENT IF EXISTS message_from_mentor_on_start;
-# DELIMITER //
-# CREATE EVENT message_from_mentor_on_start BEFORE INSERT ON messages
-#     FOR EACH ROW
-#     BEGIN
-#
-#     END //
-
-
-# DROP TRIGGER IF EXISTS check_users;
-# DELIMITER //
-# CREATE TRIGGER check_users AFTER INSERT ON users
-#     FOR EACH ROW
-#     BEGIN
-#         DECLARE table_name VARCHAR(50) DEFAULT 'users';
-#         SELECT id, name INTO @item_id, @name FROM users ORDER BY id DESC LIMIT 1;
-#         INSERT INTO logs (`table_name`, `item_id`, `name`)
-#         VALUES (table_name, @item_id, @name);
-#     END//

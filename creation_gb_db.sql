@@ -54,17 +54,6 @@ create table directions_programms(
 );
 
 
-drop table if exists discounts;
-create table discounts (
-    id serial primary key,
-    programm_id int unsigned not null,
-    discount float unsigned,
-    started_at datetime,
-    finished_ad datetime,
-    foreign key (programm_id) references programms(id)
-) comment 'скидки';
-
-
 drop table if exists technologies;
 create table technologies(
     id serial,
@@ -203,13 +192,13 @@ create table lessons(
 -- таблица расписания уроков курсов у групп и преподов:
 drop table if exists schedule;
 create table schedule(
-    id serial,
-    date datetime,
+    date datetime default current_timestamp,
     teacher_id bigint unsigned not null,
     group_id bigint unsigned not null,
-    lesson_number tinyint(2) unsigned not null,
-    course_id bigint unsigned not null,
+    lesson_number tinyint(2) unsigned not null, -- это для наглядности, вместо lesson_id
+    course_id bigint unsigned not null, -- и это
     mentor_id bigint unsigned not null,
+    primary key (date, group_id), -- в одно время у группы может быть один урок в расписании
     foreign key (teacher_id) references teachers(user_id),
     foreign key (group_id) references edu_groups(id),
     foreign key (course_id) references courses(id),
@@ -220,16 +209,13 @@ create table schedule(
 -- практические задания к каждому уроку:
 drop table if exists practicals;
 create table practicals(
-    lesson_id bigint unsigned not null, --  1*1
+    lesson_id bigint unsigned not null primary key, -- 1*1
     content varchar(1024) comment 'ссылка на задание',
     foreign key (lesson_id) references lessons(id)
 ) comment 'практическое задание';
 
 
 -- выполненные практические задания студента:
--- когда появляются в этой таблице срабатывает триггер и
--- преподу отправляется сообщение от портала
-
 drop table if exists students_practicals;
 create table students_practicals(
     student_id bigint unsigned not null,
@@ -242,51 +228,6 @@ create table students_practicals(
 );
 
 
--- проверенные преподавателем практические задания студентов:
-drop table if exists teachers_practicals;
-create table teachers_practicals(
-    teacher_id bigint unsigned not null,
-    student_id bigint unsigned not null,
-    practical_id bigint unsigned not null,
-    rating tinyint(1) comment 'оценка',
-    primary key (student_id, practical_id),
-    foreign key (teacher_id) references teachers(user_id),
-    foreign key (student_id) references students(user_id),
-    foreign key (practical_id) references practicals(lesson_id)
-);
-
-
-# -- может быть несколько видео к уроку M*1
-# drop table if exists videos;
-# create table videos(
-#     id serial,
-#     lesson_id bigint unsigned not null,
-#     content varchar(1024) comment 'ссылка на видео',
-#     foreign key (lesson_id) references lessons(id)
-# ) comment 'видеоуроки';
-#
-#
-# -- может быть несколько текстовых файлов к уроку M*1
-# drop table if exists documents;
-# create table documents(
-#     id serial,
-#     lesson_id bigint unsigned not null,
-#     content varchar(1024) comment 'ссылка на методички',
-#     foreign key (lesson_id) references lessons(id)
-# ) comment 'методички';
-#
-#
-# -- просмотренные студентом видео курсов:
-# drop table if exists students_videos;
-# create table students_videos(
-#     student_id bigint unsigned not null,
-#     video_id bigint unsigned not null,
-#     is_watched bit comment 'просмотрено ли видео', -- убрать вообще
-#     primary key (student_id, video_id),
-#     foreign key (student_id) references students(user_id),
-#     foreign key (video_id) references videos(id)
-# );
-
 drop table if exists messages;
 create table messages(
     from_id bigint unsigned not null,
@@ -298,38 +239,64 @@ create table messages(
 ) comment 'сообщения';
 
 
-drop table if exists reviews;
-create table reviews(
-    to_course bigint unsigned not null,
-    from_student bigint unsigned not null,
-    content text,
-    primary key (to_course, from_student),
-    foreign key (to_course) references courses(id),
-    foreign key (from_student) references students(user_id)
-) comment 'отзывы на курс';
+-- проверенные преподавателем практические задания студентов:
+drop table if exists teachers_practicals;
+create table teachers_practicals(
+    teacher_id bigint unsigned not null,
+    student_id bigint unsigned not null,
+    practical_id bigint unsigned not null,
+    rating tinyint(1) comment 'оценка',
+    date datetime default current_timestamp,
+    primary key (student_id, practical_id),
+    foreign key (teacher_id) references teachers(user_id),
+    foreign key (student_id) references students(user_id),
+    foreign key (practical_id) references practicals(lesson_id)
+);
 
 
-# студент оценивает разных преподов и у препода оценки разных студентов:
-drop table if exists teacher_ratings;
-create table teacher_ratings(
-    to_teacher bigint unsigned not null,
-    from_student bigint unsigned not null,
-    rating tinyint(1) unsigned not null,
-    primary key (to_teacher, from_student),
-    foreign key (to_teacher) references teachers(user_id),
-    foreign key (from_student) references students(user_id)
-) comment 'оценка преподавателю';
-
-
-# студент оценивает разных наставников и у наставников оценки разных студентов:
-drop table if exists mentor_ratings;
-create table mentor_ratings(
-    to_mentor bigint unsigned not null,
-    from_student bigint unsigned not null,
-    rating tinyint(1) unsigned not null,
-    primary key (to_mentor, from_student),
-    foreign key (to_mentor) references students(user_id),
-    foreign key (from_student) references students(user_id)
-) comment 'оценка наставнику';
+# drop table if exists discounts;
+# create table discounts (
+#     id serial primary key,
+#     programm_id int unsigned not null,
+#     discount float unsigned,
+#     started_at datetime,
+#     finished_ad datetime,
+#     foreign key (programm_id) references programms(id)
+# ) comment 'скидки';
+#
+#
+# drop table if exists reviews;
+# create table reviews(
+#     to_course bigint unsigned not null,
+#     from_student bigint unsigned not null,
+#     content text,
+#     primary key (to_course, from_student),
+#     foreign key (to_course) references courses(id),
+#     foreign key (from_student) references students(user_id)
+# ) comment 'отзывы на курс';
+#
+#
+# # студент оценивает разных преподов и у препода оценки разных студентов:
+# drop table if exists teacher_ratings;
+# create table teacher_ratings(
+#     to_teacher bigint unsigned not null,
+#     from_student bigint unsigned not null,
+#     rating tinyint(1) unsigned not null,
+#     primary key (to_teacher, from_student),
+#     foreign key (to_teacher) references teachers(user_id),
+#     foreign key (from_student) references students(user_id)
+# ) comment 'оценка преподавателю';
+#
+#
+# # студент оценивает разных наставников и у наставников оценки разных студентов:
+# drop table if exists mentor_ratings;
+# create table mentor_ratings(
+#     to_mentor bigint unsigned not null,
+#     from_student bigint unsigned not null,
+#     rating tinyint(1) unsigned not null,
+#     primary key (to_mentor, from_student),
+#     foreign key (to_mentor) references students(user_id),
+#     foreign key (from_student) references students(user_id)
+# ) comment 'оценка наставнику';
 
 
