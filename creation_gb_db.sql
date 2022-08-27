@@ -276,49 +276,5 @@ CREATE TABLE teachers_practicals
 );
 
 
-# drop table if exists discounts;
-# create table discounts (
-#     id serial primary key,
-#     programm_id int unsigned not null,
-#     discount float unsigned,
-#     started_at datetime,
-#     finished_ad datetime,
-#     foreign key (programm_id) references programms(id)
-# ) comment 'скидки';
-#
-#
-# drop table if exists reviews;
-# create table reviews(
-#     to_course bigint unsigned not null,
-#     from_student bigint unsigned not null,
-#     content text,
-#     primary key (to_course, from_student),
-#     foreign key (to_course) references courses(id),
-#     foreign key (from_student) references students(user_id)
-# ) comment 'отзывы на курс';
-#
-#
-# # студент оценивает разных преподов и у препода оценки разных студентов:
-# drop table if exists teacher_ratings;
-# create table teacher_ratings(
-#     to_teacher bigint unsigned not null,
-#     from_student bigint unsigned not null,
-#     rating tinyint(1) unsigned not null,
-#     primary key (to_teacher, from_student),
-#     foreign key (to_teacher) references teachers(user_id),
-#     foreign key (from_student) references students(user_id)
-# ) comment 'оценка преподавателю';
-#
-#
-# # студент оценивает разных наставников и у наставников оценки разных студентов:
-# drop table if exists mentor_ratings;
-# create table mentor_ratings(
-#     to_mentor bigint unsigned not null,
-#     from_student bigint unsigned not null,
-#     rating tinyint(1) unsigned not null,
-#     primary key (to_mentor, from_student),
-#     foreign key (to_mentor) references students(user_id),
-#     foreign key (from_student) references students(user_id)
-# ) comment 'оценка наставнику';
 
 
