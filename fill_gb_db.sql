@@ -260,11 +260,16 @@ VALUES (1, 1),
        (50, 10); -- 50
 
 
-insert into edu_groups (name, special_id, programm_id) values('adipisci', 1, 1);
-insert into edu_groups (name, special_id, programm_id) values('suscipit', 4, 6);
-insert into edu_groups (name, special_id, programm_id) values('quis', 5, 5);
-insert into edu_groups (name, special_id, programm_id) values('temporibus', 2, 6);
-insert into edu_groups (name, special_id, programm_id) values('molestiae', 3, 5);
+INSERT INTO edu_groups (name, special_id, programm_id)
+VALUES ('adipisci', 1, 1);
+INSERT INTO edu_groups (name, special_id, programm_id)
+VALUES ('suscipit', 4, 6);
+INSERT INTO edu_groups (name, special_id, programm_id)
+VALUES ('quis', 5, 5);
+INSERT INTO edu_groups (name, special_id, programm_id)
+VALUES ('temporibus', 2, 6);
+INSERT INTO edu_groups (name, special_id, programm_id)
+VALUES ('molestiae', 3, 5);
 
 
 CALL students_fill_sp('Dante', 'Walter', 89044828097,
@@ -279,7 +284,8 @@ CALL students_fill_sp('Kip', 'Barrows', 89877538566, 'augusta14@example.com',
                       'Modi vel omnis quo voluptatem deleniti.', '564ec48d00e14a2e94355099d8140cf62adc1c74',
                       'http://lorempixel.com/640/480/', 1,
                       'Aut at veritatis id consequuntur facere aut sed. Nesciunt laborum quia voluptas recusandae.
-              Non consectetur et dolorem est blanditiis inventore. Cum occaecati repellat expedita dolores.', @trans_result);
+              Non consectetur et dolorem est blanditiis inventore. Cum occaecati repellat expedita dolores.',
+                      @trans_result);
 
 CALL students_fill_sp('Korbin', 'Jast', 89067819723, 'bethel.anderson@example.org',
                       'other', 'Saint Pierre and Miquelon',
@@ -300,7 +306,8 @@ CALL students_fill_sp('Desmond', 'Koepp', 89654236772, 'sven59@example.com',
                       'de20002c54e2f81feabca4e923ac86ab02e9681d',
                       'http://lorempixel.com/640/480/', 5,
                       'Facilis est architecto quia veritatis. Magnam nemo sit ut ullam unde voluptatem excepturi.
-              Aut et numquam quis quae. Sapiente ipsam odio tenetur sequi praesentium dolorem voluptas aut.', @trans_result);
+              Aut et numquam quis quae. Sapiente ipsam odio tenetur sequi praesentium dolorem voluptas aut.',
+                      @trans_result);
 CALL students_fill_sp('Emmanuel', 'Olson', 89264766375, 'otis96@example.net',
                       'other', 'Turkey', 'Gerhardview', '2018-11-26',
                       'Culpa autem quo optio possimus earum expedita maxime.',
@@ -329,7 +336,8 @@ CALL students_fill_sp('Ubaldo', 'Moen', 89270077158, 'ccormier@example.com',
                       '267a98609239680a817cece632a45399d9b6d734',
                       'http://lorempixel.com/640/480/', 4,
                       'Maxime occaecati quasi a accusamus ut qui illum. Et facilis accusantium nemo sed hic unde.
-              Error quia ea non asperiores fugiat officia rerum. Voluptatem numquam rerum voluptatem ut eum.', @trans_result);
+              Error quia ea non asperiores fugiat officia rerum. Voluptatem numquam rerum voluptatem ut eum.',
+                      @trans_result);
 CALL students_fill_sp('Jerad', 'Padberg', 89517435921, 'fabiola60@example.com',
                       'male', 'Saint Lucia', 'Raynorbury', '2018-03-06',
                       'Ea quos quisquam maiores cupiditate harum dolores perspiciatis.',
@@ -903,7 +911,8 @@ VALUES (1, 1, 1, 'Placeat quis sint quia itaque voluptas dolor.'),
        (97, 1, 29, 'Tenetur est sapiente occaecati.'),
        (98, 2, 29, 'Quaerat modi sed eos vel quae.'),
        (99, 1, 30, 'Architecto ea similique eos fuga consequatur unde et.'),
-       (100, 2, 30, 'Aut quia at iure ea sed dolorum officia.'); -- 100
+       (100, 2, 30, 'Aut quia at iure ea sed dolorum officia.');
+-- 100
 
 
 -- fill table schedule:
@@ -1081,132 +1090,224 @@ VALUES (1, 'http://lorempixel.com/640/480/'),
        (97, 'http://lorempixel.com/640/480/'),
        (98, 'http://lorempixel.com/640/480/'),
        (99, 'http://lorempixel.com/640/480/'),
-       (100, 'http://lorempixel.com/640/480/'); -- 100
+       (100, 'http://lorempixel.com/640/480/');
+-- 100
 
 
 -- fill table students_practicals:
-INSERT INTO `students_practicals` VALUES (1, 2, '2021-03-29 15:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (1, 33, '2021-03-06 10:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (1, 35, '2021-03-16 15:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (1, 57, '2021-03-26 15:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (1, 86, '2021-03-23 15:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (1, 89, '2021-03-30 15:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (3, 14, '2021-04-10 20:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (3, 18, '2021-04-16 20:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (3, 74, '2021-03-15 20:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (4, 42, '2021-03-25 13:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (4, 87, '2021-04-15 20:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (4, 98, '2021-04-21 15:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (5, 9, '2021-04-16 12:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (5, 88, '2021-03-30 10:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (7, 42, '2021-03-27 19:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (7, 87, '2021-03-20 20:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (7, 98, '2021-04-12 10:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (9, 4, '2021-04-27 15:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (10, 44, '2021-03-30 13:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (10, 88, '2021-04-16 20:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (12, 13, '2021-04-23 10:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (14, 6, '2021-04-24 15:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (14, 42, '2021-03-29 13:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (16, 1, '2021-03-27 15:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (23, 16, '2021-04-18 20:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (24, 5, '2021-04-16 20:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (24, 98, '2021-04-24 15:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (25, 8, '2021-04-10 12:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (25, 60, '2021-03-12 15:00:00', 'http://lorempixel.com/640/480/');
-INSERT INTO `students_practicals` VALUES (25, 74, '2021-03-20 12:00:00', 'http://lorempixel.com/640/480/'); -- 30
+INSERT INTO `students_practicals`
+VALUES (1, 2, '2021-03-29 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (1, 33, '2021-03-06 10:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (1, 35, '2021-03-16 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (1, 57, '2021-03-26 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (1, 86, '2021-03-23 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (1, 89, '2021-03-30 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (3, 14, '2021-04-10 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (3, 18, '2021-04-16 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (3, 74, '2021-03-15 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (4, 42, '2021-03-25 13:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (4, 87, '2021-04-15 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (4, 98, '2021-04-21 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (5, 9, '2021-04-16 12:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (5, 88, '2021-03-30 10:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (7, 42, '2021-03-27 19:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (7, 87, '2021-03-20 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (7, 98, '2021-04-12 10:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (9, 4, '2021-04-27 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (10, 44, '2021-03-30 13:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (10, 88, '2021-04-16 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (12, 13, '2021-04-23 10:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (14, 6, '2021-04-24 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (14, 42, '2021-03-29 13:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (16, 1, '2021-03-27 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (23, 16, '2021-04-18 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (24, 5, '2021-04-16 20:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (24, 98, '2021-04-24 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (25, 8, '2021-04-10 12:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (25, 60, '2021-03-12 15:00:00', 'http://lorempixel.com/640/480/');
+INSERT INTO `students_practicals`
+VALUES (25, 74, '2021-03-20 12:00:00', 'http://lorempixel.com/640/480/'); -- 30
 
 
 INSERT INTO `messages`
 VALUES (1, 2,
-        'Nobis quia et tempore ducimus. Exercitationem aliquam sit dolor numquam incidunt. Et at ut consequatur qui officia dolore maiores. Rerum sit debitis exercitationem repudiandae eligendi.', '2021-03-30 13:00:00'),
+        'Nobis quia et tempore ducimus. Exercitationem aliquam sit dolor numquam incidunt. Et at ut consequatur qui officia dolore maiores. Rerum sit debitis exercitationem repudiandae eligendi.',
+        '2021-03-30 13:00:00'),
        (2, 1,
-        'Qui culpa id quis molestias unde. Rem numquam aspernatur ipsa consequuntur soluta. Aut id et quia eaque nostrum praesentium. Maiores quia aut tempore velit qui.', '2021-03-30 13:00:00'),
+        'Qui culpa id quis molestias unde. Rem numquam aspernatur ipsa consequuntur soluta. Aut id et quia eaque nostrum praesentium. Maiores quia aut tempore velit qui.',
+        '2021-03-30 13:00:00'),
        (3, 1,
-        'Atque excepturi natus et sed. Sunt ipsum suscipit ut tempora enim id et. Eum ut facere ab adipisci. Facilis accusantium molestiae quibusdam id minima ut. Consectetur explicabo minus vitae ipsa ut.', '2021-03-30 13:00:00'),
+        'Atque excepturi natus et sed. Sunt ipsum suscipit ut tempora enim id et. Eum ut facere ab adipisci. Facilis accusantium molestiae quibusdam id minima ut. Consectetur explicabo minus vitae ipsa ut.',
+        '2021-03-30 13:00:00'),
        (1, 3,
-        'Quia iste voluptas et culpa aut et ullam modi. Debitis cum vel accusantium sed. Et nulla aut rerum voluptatem nam nemo et.', '2021-03-30 13:00:00'),
+        'Quia iste voluptas et culpa aut et ullam modi. Debitis cum vel accusantium sed. Et nulla aut rerum voluptatem nam nemo et.',
+        '2021-03-30 13:00:00'),
        (5, 4,
-        'Voluptatem tempora beatae sed ut. Optio et doloribus officiis rerum error et culpa. In autem aspernatur cupiditate. Dignissimos unde similique modi.', '2021-03-30 13:00:00'),
+        'Voluptatem tempora beatae sed ut. Optio et doloribus officiis rerum error et culpa. In autem aspernatur cupiditate. Dignissimos unde similique modi.',
+        '2021-03-30 13:00:00'),
        (4, 5,
-        'Facere quia fugit alias reprehenderit et. Tempore eos saepe itaque impedit quos animi. Incidunt sequi ut molestiae perspiciatis laborum porro id. Est illum aperiam magnam veniam.', '2021-03-30 13:00:00'),
-       (7, 6, 'Qui voluptatem eligendi officiis quisquam unde nemo. Laudantium occaecati dolore quia nihil.', '2021-03-30 13:00:00'),
+        'Facere quia fugit alias reprehenderit et. Tempore eos saepe itaque impedit quos animi. Incidunt sequi ut molestiae perspiciatis laborum porro id. Est illum aperiam magnam veniam.',
+        '2021-03-30 13:00:00'),
+       (7, 6, 'Qui voluptatem eligendi officiis quisquam unde nemo. Laudantium occaecati dolore quia nihil.',
+        '2021-03-30 13:00:00'),
        (8, 6,
-        'Voluptas suscipit asperiores consequatur ipsam sunt omnis. Aliquid et voluptate voluptatem ut accusantium labore vitae.', '2021-03-30 13:00:00'),
-       (6, 9, 'Temporibus dolores et consequatur dolorem rerum dignissimos. Atque saepe sit quos sed.', '2021-03-30 13:00:00'),
+        'Voluptas suscipit asperiores consequatur ipsam sunt omnis. Aliquid et voluptate voluptatem ut accusantium labore vitae.',
+        '2021-03-30 13:00:00'),
+       (6, 9, 'Temporibus dolores et consequatur dolorem rerum dignissimos. Atque saepe sit quos sed.',
+        '2021-03-30 13:00:00'),
        (6, 10,
-        'Nihil dolorum itaque veritatis molestias aut occaecati sequi. Quis libero provident labore sit repellendus. Est vitae qui consequatur sequi pariatur non.', '2021-03-30 13:00:00'),
+        'Nihil dolorum itaque veritatis molestias aut occaecati sequi. Quis libero provident labore sit repellendus. Est vitae qui consequatur sequi pariatur non.',
+        '2021-03-30 13:00:00'),
        (11, 7,
-        'Id beatae ut veritatis dolorem. Perferendis consequatur officia et. Qui officiis culpa dolore eaque id voluptatem quia. Eveniet consequuntur harum blanditiis tenetur veritatis blanditiis dicta.', '2021-03-30 13:00:00'),
+        'Id beatae ut veritatis dolorem. Perferendis consequatur officia et. Qui officiis culpa dolore eaque id voluptatem quia. Eveniet consequuntur harum blanditiis tenetur veritatis blanditiis dicta.',
+        '2021-03-30 13:00:00'),
        (7, 12,
-        'Eum culpa quo nobis consequuntur non dolorum dignissimos et. Fuga nobis et aut aut dolores. Omnis quisquam voluptates deserunt. At vel voluptate veritatis et tenetur aut rerum.', '2021-03-30 13:00:00'),
+        'Eum culpa quo nobis consequuntur non dolorum dignissimos et. Fuga nobis et aut aut dolores. Omnis quisquam voluptates deserunt. At vel voluptate veritatis et tenetur aut rerum.',
+        '2021-03-30 13:00:00'),
        (12, 13,
-        'Hic omnis voluptatem sunt et nihil nihil. Rem molestias maiores nihil est voluptates occaecati. Quia aut natus ipsum. Nihil omnis consequatur quo.', '2021-03-30 13:00:00'),
+        'Hic omnis voluptatem sunt et nihil nihil. Rem molestias maiores nihil est voluptates occaecati. Quia aut natus ipsum. Nihil omnis consequatur quo.',
+        '2021-03-30 13:00:00'),
        (5, 14,
-        'Laboriosam aliquam unde qui repellendus distinctio. Ipsa rerum laboriosam molestiae dolores hic vel repellendus. Similique consequatur eaque corporis necessitatibus debitis itaque rerum aliquid.', '2021-03-30 13:00:00'),
+        'Laboriosam aliquam unde qui repellendus distinctio. Ipsa rerum laboriosam molestiae dolores hic vel repellendus. Similique consequatur eaque corporis necessitatibus debitis itaque rerum aliquid.',
+        '2021-03-30 13:00:00'),
        (15, 11,
-        'Assumenda et dolorem eveniet amet sed aut. Velit esse quae ipsum cupiditate cupiditate. Necessitatibus alias tempore quisquam atque. Omnis voluptatem asperiores est nihil et.', '2021-03-30 13:00:00'),
+        'Assumenda et dolorem eveniet amet sed aut. Velit esse quae ipsum cupiditate cupiditate. Necessitatibus alias tempore quisquam atque. Omnis voluptatem asperiores est nihil et.',
+        '2021-03-30 13:00:00'),
        (12, 16,
-        'Sit et repellendus distinctio ratione est. Illum tempore et inventore eligendi est ipsum doloremque nulla. Vel dicta cum exercitationem eveniet.', '2021-03-30 13:00:00'),
+        'Sit et repellendus distinctio ratione est. Illum tempore et inventore eligendi est ipsum doloremque nulla. Vel dicta cum exercitationem eveniet.',
+        '2021-03-30 13:00:00'),
        (5, 17,
-        'Repellendus at est aut molestiae voluptatem. Cumque ea expedita officiis qui. Voluptatem qui officia quia non voluptas rerum cum.', '2021-03-30 13:00:00'),
+        'Repellendus at est aut molestiae voluptatem. Cumque ea expedita officiis qui. Voluptatem qui officia quia non voluptas rerum cum.',
+        '2021-03-30 13:00:00'),
        (1, 18,
-        'Natus omnis molestiae reprehenderit quas in accusantium. Commodi alias aut suscipit libero assumenda sunt. Eos doloremque debitis fugiat autem atque.', '2021-03-30 13:00:00'),
+        'Natus omnis molestiae reprehenderit quas in accusantium. Commodi alias aut suscipit libero assumenda sunt. Eos doloremque debitis fugiat autem atque.',
+        '2021-03-30 13:00:00'),
        (19, 14,
-        'Quis ad doloremque eaque et et. Asperiores pariatur harum laboriosam qui. Nesciunt quaerat qui qui necessitatibus alias doloremque molestiae. Fugiat illum qui nostrum debitis.', '2021-03-30 13:00:00'),
+        'Quis ad doloremque eaque et et. Asperiores pariatur harum laboriosam qui. Nesciunt quaerat qui qui necessitatibus alias doloremque molestiae. Fugiat illum qui nostrum debitis.',
+        '2021-03-30 13:00:00'),
        (14, 20,
-        'Doloremque iusto quidem inventore delectus voluptate sit ducimus aut. Hic vero iusto cupiditate quia. Fugiat sunt natus debitis et. Quo alias quisquam non ut.', '2021-03-30 13:00:00'),
+        'Doloremque iusto quidem inventore delectus voluptate sit ducimus aut. Hic vero iusto cupiditate quia. Fugiat sunt natus debitis et. Quo alias quisquam non ut.',
+        '2021-03-30 13:00:00'),
        (20, 21,
-        'Animi quibusdam doloribus dolorum. Qui aut tempore in non. Excepturi et autem dignissimos et est at ex. Eum aperiam tempore molestiae.', '2021-03-30 13:00:00'),
+        'Animi quibusdam doloribus dolorum. Qui aut tempore in non. Excepturi et autem dignissimos et est at ex. Eum aperiam tempore molestiae.',
+        '2021-03-30 13:00:00'),
        (21, 20,
-        'Cum dolores corporis fugiat natus quae explicabo. Qui officiis veniam temporibus nemo explicabo porro. Eius mollitia ea omnis eum. Repellendus ut corrupti esse debitis et similique incidunt.', '2021-03-30 13:00:00'),
+        'Cum dolores corporis fugiat natus quae explicabo. Qui officiis veniam temporibus nemo explicabo porro. Eius mollitia ea omnis eum. Repellendus ut corrupti esse debitis et similique incidunt.',
+        '2021-03-30 13:00:00'),
        (23, 15,
-        'Recusandae earum quisquam nobis non. Nesciunt iste dolores nam necessitatibus itaque. Culpa sed et ab cum aliquam blanditiis nihil.', '2021-03-30 13:00:00'),
+        'Recusandae earum quisquam nobis non. Nesciunt iste dolores nam necessitatibus itaque. Culpa sed et ab cum aliquam blanditiis nihil.',
+        '2021-03-30 13:00:00'),
        (21, 24,
-        'Officiis et debitis fuga aliquam consequatur delectus. Quam quo quae ducimus aut ducimus. Qui sit ut asperiores officiis repellat ullam.', '2021-03-30 13:00:00'),
+        'Officiis et debitis fuga aliquam consequatur delectus. Quam quo quae ducimus aut ducimus. Qui sit ut asperiores officiis repellat ullam.',
+        '2021-03-30 13:00:00'),
        (25, 22,
-        'Aut itaque officia beatae nesciunt laborum odio. Quasi nihil officiis quo quam. Delectus earum cupiditate ut nulla molestias praesentium officia.', '2021-03-30 13:00:00'),
+        'Aut itaque officia beatae nesciunt laborum odio. Quasi nihil officiis quo quam. Delectus earum cupiditate ut nulla molestias praesentium officia.',
+        '2021-03-30 13:00:00'),
        (22, 25,
-        'Aut eos tenetur numquam quos itaque et. Qui voluptatem nostrum architecto laborum et omnis. Temporibus qui maiores cum et a. Voluptatum et non in culpa ipsa mollitia quia.', '2021-03-30 13:00:00'),
+        'Aut eos tenetur numquam quos itaque et. Qui voluptatem nostrum architecto laborum et omnis. Temporibus qui maiores cum et a. Voluptatum et non in culpa ipsa mollitia quia.',
+        '2021-03-30 13:00:00'),
        (2, 27,
-        'Rerum et voluptatem earum ea. Dolores et sequi repellendus in vel quis dolorem.\nPlaceat rerum voluptatibus praesentium omnis est. Perferendis aliquid fuga eum odit dolores soluta.', '2021-03-30 13:00:00'),
+        'Rerum et voluptatem earum ea. Dolores et sequi repellendus in vel quis dolorem.\nPlaceat rerum voluptatibus praesentium omnis est. Perferendis aliquid fuga eum odit dolores soluta.',
+        '2021-03-30 13:00:00'),
        (28, 21,
-        'Exercitationem corporis dolorum sit accusantium molestiae dolorem iste. Distinctio ut nihil architecto voluptatibus. Aut qui et fugit voluptate. Beatae dolor expedita quaerat.', '2021-03-30 13:00:00'),
+        'Exercitationem corporis dolorum sit accusantium molestiae dolorem iste. Distinctio ut nihil architecto voluptatibus. Aut qui et fugit voluptate. Beatae dolor expedita quaerat.',
+        '2021-03-30 13:00:00'),
        (29, 9,
-        'Dolorum hic sed ad deserunt optio odio minus. Quod sed explicabo dignissimos quidem consequatur accusamus minus.', '2021-03-30 13:00:00'),
-       (30, 3, 'Illo odio ipsam atque labore nemo. Totam consequatur non nihil. Eum officia exercitationem sunt est.', '2021-03-30 13:00:00'); -- 30
+        'Dolorum hic sed ad deserunt optio odio minus. Quod sed explicabo dignissimos quidem consequatur accusamus minus.',
+        '2021-03-30 13:00:00'),
+       (30, 3, 'Illo odio ipsam atque labore nemo. Totam consequatur non nihil. Eum officia exercitationem sunt est.',
+        '2021-03-30 13:00:00');
+-- 30
 
 -- наполнение teachers_practicals + сообщения
 -- (почему-то без ошибок заполняет только по одной строке)
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (36, 16, 1, 4);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (36, 1, 2, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (37, 9, 4, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (37, 24, 5, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (37, 14, 6, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (38, 25, 8, 3);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (38, 5, 9, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (39, 12, 13, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (40, 3, 14, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (40, 23, 16, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (40, 3, 18, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (45, 1, 33, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (45, 1, 35, 4);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (48, 4, 42, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (48, 7, 42, 4);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (48, 14, 42, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (48, 10, 44, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (37, 1, 57, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (38, 25, 60, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (42, 3, 74, 3);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (42, 25, 74, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (46, 1, 86, 4);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (46, 4, 87, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (46, 7, 87, 4);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (46, 5, 88, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (46, 10, 88, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (46, 1, 89, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (49, 4, 98, 5);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (49, 7, 98, 4);
-INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating) VALUES (49, 24, 98, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (36, 16, 1, 4);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (36, 1, 2, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (37, 9, 4, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (37, 24, 5, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (37, 14, 6, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (38, 25, 8, 3);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (38, 5, 9, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (39, 12, 13, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (40, 3, 14, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (40, 23, 16, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (40, 3, 18, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (45, 1, 33, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (45, 1, 35, 4);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (48, 4, 42, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (48, 7, 42, 4);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (48, 14, 42, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (48, 10, 44, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (37, 1, 57, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (38, 25, 60, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (42, 3, 74, 3);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (42, 25, 74, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (46, 1, 86, 4);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (46, 4, 87, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (46, 7, 87, 4);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (46, 5, 88, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (46, 10, 88, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (46, 1, 89, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (49, 4, 98, 5);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (49, 7, 98, 4);
+INSERT INTO `teachers_practicals` (teacher_id, student_id, practical_id, rating)
+VALUES (49, 24, 98, 5);
 
 

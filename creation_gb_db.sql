@@ -1,256 +1,278 @@
-drop database if exists geekbrains_db;
-create database geekbrains_db;
-use geekbrains_db;
+DROP DATABASE IF EXISTS geekbrains_db;
+CREATE DATABASE geekbrains_db;
+USE geekbrains_db;
 
 
-drop table if exists directions;
-create table directions(
-    id int unsigned unique not null auto_increment,
-    name varchar(255) unique not null
-) comment 'направления обучения';
+DROP TABLE IF EXISTS directions;
+CREATE TABLE directions
+(
+    id   INT UNSIGNED UNIQUE NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) UNIQUE NOT NULL
+) COMMENT 'направления обучения';
 
 
-drop table if exists specializations;
-create table specializations(
-    id int unsigned unique not null auto_increment,
-    name varchar(255) unique not null
-) comment 'специализации';
+DROP TABLE IF EXISTS specializations;
+CREATE TABLE specializations
+(
+    id   INT UNSIGNED UNIQUE NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) UNIQUE NOT NULL
+) COMMENT 'специализации';
 
 
-drop table if exists programms;
-create table programms(
-    id int unsigned not null unique auto_increment primary key,
-    logo varchar(1024),
-    title varchar(100) unique not null,
-    level_prog enum('Intern', 'junior', 'middle', 'middle+'),
-    is_employment bit,
-    descriptions text not null,
-    salary_at_start int unsigned not null,
-    road_map varchar(1024),
-    start_date date,
-    duration varchar(100),
-    price decimal(11,2)
-) comment 'программы обучения';
+DROP TABLE IF EXISTS programms;
+CREATE TABLE programms
+(
+    id              INT UNSIGNED        NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+    logo            VARCHAR(1024),
+    title           VARCHAR(100) UNIQUE NOT NULL,
+    level_prog      ENUM ('Intern', 'junior', 'middle', 'middle+'),
+    is_employment   BIT,
+    descriptions    TEXT                NOT NULL,
+    salary_at_start INT UNSIGNED        NOT NULL,
+    road_map        VARCHAR(1024),
+    start_date      DATE,
+    duration        VARCHAR(100),
+    price           DECIMAL(11, 2)
+) COMMENT 'программы обучения';
 
 
 # у каждой программы мб несколько специализаций и наоборот:
-drop table if exists specializations_programms;
-create table specializations_programms(
-    special_id int unsigned  not null,
-    programm_id int unsigned not null,
-    primary key (special_id, programm_id),
-    foreign key (special_id) references specializations(id),
-    foreign key (programm_id) references programms(id)
+DROP TABLE IF EXISTS specializations_programms;
+CREATE TABLE specializations_programms
+(
+    special_id  INT UNSIGNED NOT NULL,
+    programm_id INT UNSIGNED NOT NULL,
+    PRIMARY KEY (special_id, programm_id),
+    FOREIGN KEY (special_id) REFERENCES specializations (id),
+    FOREIGN KEY (programm_id) REFERENCES programms (id)
 );
 
 # направление обучения может включать несколько программ и программа соотв нескольким направл
-drop table if exists directions_programms;
-create table directions_programms(
-    direction_id int unsigned not null,
-    programm_id int unsigned not null,
-    primary key (direction_id, programm_id),
-    foreign key (direction_id) references directions(id),
-    foreign key (programm_id) references programms(id)
+DROP TABLE IF EXISTS directions_programms;
+CREATE TABLE directions_programms
+(
+    direction_id INT UNSIGNED NOT NULL,
+    programm_id  INT UNSIGNED NOT NULL,
+    PRIMARY KEY (direction_id, programm_id),
+    FOREIGN KEY (direction_id) REFERENCES directions (id),
+    FOREIGN KEY (programm_id) REFERENCES programms (id)
 );
 
 
-drop table if exists technologies;
-create table technologies(
-    id serial,
-    name varchar(255) unique
-) comment 'языки и технологии';
+DROP TABLE IF EXISTS technologies;
+CREATE TABLE technologies
+(
+    id   SERIAL,
+    name VARCHAR(255) UNIQUE
+) COMMENT 'языки и технологии';
 
 
 # в программе изучают много технологий и наоборот:
-drop table if exists technologies_programms;
-create table technologies_programms(
-    tech_id bigint unsigned not null,
-    programm_id int unsigned not null,
-    primary key (tech_id, programm_id),
-    foreign key (tech_id) references technologies(id),
-    foreign key (programm_id) references programms(id)
+DROP TABLE IF EXISTS technologies_programms;
+CREATE TABLE technologies_programms
+(
+    tech_id     BIGINT UNSIGNED NOT NULL,
+    programm_id INT UNSIGNED    NOT NULL,
+    PRIMARY KEY (tech_id, programm_id),
+    FOREIGN KEY (tech_id) REFERENCES technologies (id),
+    FOREIGN KEY (programm_id) REFERENCES programms (id)
 );
 
 
 # по одной программе могут обучаться много групп:
-drop table if exists edu_groups;
-create table edu_groups(
-    id serial,
-    name varchar(255) unique,
-    special_id int unsigned not null,
-    programm_id int unsigned not null,
-    foreign key (special_id) references specializations(id),
-    foreign key (programm_id) references programms(id)
-) comment 'учебная группа';
+DROP TABLE IF EXISTS edu_groups;
+CREATE TABLE edu_groups
+(
+    id          SERIAL,
+    name        VARCHAR(255) UNIQUE,
+    special_id  INT UNSIGNED NOT NULL,
+    programm_id INT UNSIGNED NOT NULL,
+    FOREIGN KEY (special_id) REFERENCES specializations (id),
+    FOREIGN KEY (programm_id) REFERENCES programms (id)
+) COMMENT 'учебная группа';
 
 
-drop table if exists users;
-create table users(
-    id bigint unsigned not null auto_increment primary key,
-    firstname varchar(50) not null,
-    lastname varchar(50) not null,
-    phone bigint unsigned not null unique,
-    email varchar(50) unique not null,
-    gender enum('male', 'female', 'other'),
-    country varchar(50) not null,
-    city varchar(50) not null,
-    birth_date date,
-    interests varchar(1000),
-    password_hash varchar(200) not null,
-    photo varchar(1024)
-) comment 'пользователи';
+DROP TABLE IF EXISTS users;
+CREATE TABLE users
+(
+    id            BIGINT UNSIGNED    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    firstname     VARCHAR(50)        NOT NULL,
+    lastname      VARCHAR(50)        NOT NULL,
+    phone         BIGINT UNSIGNED    NOT NULL UNIQUE,
+    email         VARCHAR(50) UNIQUE NOT NULL,
+    gender        ENUM ('male', 'female', 'other'),
+    country       VARCHAR(50)        NOT NULL,
+    city          VARCHAR(50)        NOT NULL,
+    birth_date    DATE,
+    interests     VARCHAR(1000),
+    password_hash VARCHAR(200)       NOT NULL,
+    photo         VARCHAR(1024)
+) COMMENT 'пользователи';
 
 
 # студент это юзер:
-drop table if exists students;
-create table students(
-    user_id bigint unsigned not null primary key,
-    group_id bigint unsigned not null,
-    aboutme varchar(800),
-    foreign key (user_id) references users(id),
-    foreign key (group_id) references edu_groups(id)
-) comment 'студенты';
+DROP TABLE IF EXISTS students;
+CREATE TABLE students
+(
+    user_id  BIGINT UNSIGNED NOT NULL PRIMARY KEY,
+    group_id BIGINT UNSIGNED NOT NULL,
+    aboutme  VARCHAR(800),
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (group_id) REFERENCES edu_groups (id)
+) COMMENT 'студенты';
 
 
 # преподаватель это юзер:
-drop table if exists teachers;
-create table teachers(
-    user_id bigint unsigned not null primary key,
-    professional_way varchar(200),
-    education varchar(200),
-    work_explorer varchar(200),
-    use_technologies varchar(200),
-    position varchar(200),
-    words_for_students varchar(200),
-    teaching_subject varchar(200),
-    foreign key (user_id) references users(id)
-) comment 'профиль преподавателя';
+DROP TABLE IF EXISTS teachers;
+CREATE TABLE teachers
+(
+    user_id            BIGINT UNSIGNED NOT NULL PRIMARY KEY,
+    professional_way   VARCHAR(200),
+    education          VARCHAR(200),
+    work_explorer      VARCHAR(200),
+    use_technologies   VARCHAR(200),
+    position           VARCHAR(200),
+    words_for_students VARCHAR(200),
+    teaching_subject   VARCHAR(200),
+    FOREIGN KEY (user_id) REFERENCES users (id)
+) COMMENT 'профиль преподавателя';
 
 
-drop table if exists courses;
-create table  courses(
-    id serial primary key,
-    title varchar(100) not null
-) comment 'курсы';
+DROP TABLE IF EXISTS courses;
+CREATE TABLE courses
+(
+    id    SERIAL PRIMARY KEY,
+    title VARCHAR(100) NOT NULL
+) COMMENT 'курсы';
 
 
 -- у каждой специализации свои курсы, кот добавляются к программе:
-drop table if exists specializations_courses;
-create table specializations_courses(
-    spec_id int unsigned not null,
-    course_id bigint unsigned not null,
-    primary key (spec_id, course_id),
-    foreign key (spec_id) references specializations(id),
-    foreign key (course_id) references courses(id)
+DROP TABLE IF EXISTS specializations_courses;
+CREATE TABLE specializations_courses
+(
+    spec_id   INT UNSIGNED    NOT NULL,
+    course_id BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (spec_id, course_id),
+    FOREIGN KEY (spec_id) REFERENCES specializations (id),
+    FOREIGN KEY (course_id) REFERENCES courses (id)
 );
 
 
 -- у программы много курсов и наоборот:
-drop table if exists programms_courses;
-create table programms_courses(
-    programm_id int unsigned not null,
-    course_id bigint unsigned not null,
-    primary key (programm_id, course_id),
-    foreign key (programm_id) references programms(id),
-    foreign key (course_id) references courses(id)
+DROP TABLE IF EXISTS programms_courses;
+CREATE TABLE programms_courses
+(
+    programm_id INT UNSIGNED    NOT NULL,
+    course_id   BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (programm_id, course_id),
+    FOREIGN KEY (programm_id) REFERENCES programms (id),
+    FOREIGN KEY (course_id) REFERENCES courses (id)
 );
 
 
 -- у препода много курсов и наоборот(то что знает):
-drop table if exists courses_teachers;
-create table courses_teachers(
-    course_id bigint unsigned not null,
-    teacher_id bigint unsigned not null,
-    primary key (course_id, teacher_id),
-    foreign key (course_id) references courses(id),
-    foreign key (teacher_id) references teachers(user_id)
+DROP TABLE IF EXISTS courses_teachers;
+CREATE TABLE courses_teachers
+(
+    course_id  BIGINT UNSIGNED NOT NULL,
+    teacher_id BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (course_id, teacher_id),
+    FOREIGN KEY (course_id) REFERENCES courses (id),
+    FOREIGN KEY (teacher_id) REFERENCES teachers (user_id)
 );
 
 
 # у наставника много курсов и наоборот
 # студент, став ментором, добавляется сюда:
-drop table if exists courses_mentors;
-create table courses_mentors(
-    course_id bigint unsigned not null,
-    mentor_id bigint unsigned not null,
-    primary key (course_id, mentor_id),
-    foreign key (course_id) references courses(id),
-    foreign key (mentor_id) references students(user_id)
+DROP TABLE IF EXISTS courses_mentors;
+CREATE TABLE courses_mentors
+(
+    course_id BIGINT UNSIGNED NOT NULL,
+    mentor_id BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (course_id, mentor_id),
+    FOREIGN KEY (course_id) REFERENCES courses (id),
+    FOREIGN KEY (mentor_id) REFERENCES students (user_id)
 );
 
 
-drop table if exists lessons;
-create table lessons(
-    id serial primary key,
-    number tinyint(2) unsigned not null,
-    course_id bigint unsigned not null,  -- ?
-    title varchar(200),
-    foreign key (course_id) references courses(id)
-) comment 'уроки курса';
+DROP TABLE IF EXISTS lessons;
+CREATE TABLE lessons
+(
+    id        SERIAL PRIMARY KEY,
+    number    TINYINT(2) UNSIGNED NOT NULL,
+    course_id BIGINT UNSIGNED     NOT NULL, -- ?
+    title     VARCHAR(200),
+    FOREIGN KEY (course_id) REFERENCES courses (id)
+) COMMENT 'уроки курса';
 
 
 -- таблица расписания уроков курсов у групп и преподов:
-drop table if exists schedule;
-create table schedule(
-    date datetime default current_timestamp,
-    teacher_id bigint unsigned not null,
-    group_id bigint unsigned not null,
-    lesson_number tinyint(2) unsigned not null, -- это для наглядности, вместо lesson_id
-    course_id bigint unsigned not null, -- и это
-    mentor_id bigint unsigned not null,
-    primary key (date, group_id), -- в одно время у группы может быть один урок в расписании
-    foreign key (teacher_id) references teachers(user_id),
-    foreign key (group_id) references edu_groups(id),
-    foreign key (course_id) references courses(id),
-    foreign key (mentor_id) references students(user_id)
-) comment 'расписание';
+DROP TABLE IF EXISTS schedule;
+CREATE TABLE schedule
+(
+    date          DATETIME DEFAULT CURRENT_TIMESTAMP,
+    teacher_id    BIGINT UNSIGNED     NOT NULL,
+    group_id      BIGINT UNSIGNED     NOT NULL,
+    lesson_number TINYINT(2) UNSIGNED NOT NULL, -- это для наглядности, вместо lesson_id
+    course_id     BIGINT UNSIGNED     NOT NULL, -- и это
+    mentor_id     BIGINT UNSIGNED     NOT NULL,
+    PRIMARY KEY (date, group_id),               -- в одно время у группы может быть один урок в расписании
+    FOREIGN KEY (teacher_id) REFERENCES teachers (user_id),
+    FOREIGN KEY (group_id) REFERENCES edu_groups (id),
+    FOREIGN KEY (course_id) REFERENCES courses (id),
+    FOREIGN KEY (mentor_id) REFERENCES students (user_id)
+) COMMENT 'расписание';
 
 
 -- практические задания к каждому уроку:
-drop table if exists practicals;
-create table practicals(
-    lesson_id bigint unsigned not null primary key, -- 1*1
-    content varchar(1024) comment 'ссылка на задание',
-    foreign key (lesson_id) references lessons(id)
-) comment 'практическое задание';
+DROP TABLE IF EXISTS practicals;
+CREATE TABLE practicals
+(
+    lesson_id BIGINT UNSIGNED NOT NULL PRIMARY KEY, -- 1*1
+    content   VARCHAR(1024) COMMENT 'ссылка на задание',
+    FOREIGN KEY (lesson_id) REFERENCES lessons (id)
+) COMMENT 'практическое задание';
 
 
 -- выполненные практические задания студента:
-drop table if exists students_practicals;
-create table students_practicals(
-    student_id bigint unsigned not null,
-    practical_id bigint unsigned not null,
-    date datetime default current_timestamp,
-    content varchar(1024) comment 'ссылка на выполнение',
-    primary key (student_id, practical_id),
-    foreign key (student_id) references students(user_id),
-    foreign key (practical_id) references practicals(lesson_id)
+DROP TABLE IF EXISTS students_practicals;
+CREATE TABLE students_practicals
+(
+    student_id   BIGINT UNSIGNED NOT NULL,
+    practical_id BIGINT UNSIGNED NOT NULL,
+    date         DATETIME DEFAULT CURRENT_TIMESTAMP,
+    content      VARCHAR(1024) COMMENT 'ссылка на выполнение',
+    PRIMARY KEY (student_id, practical_id),
+    FOREIGN KEY (student_id) REFERENCES students (user_id),
+    FOREIGN KEY (practical_id) REFERENCES practicals (lesson_id)
 );
 
 
-drop table if exists messages;
-create table messages(
-    from_id bigint unsigned not null,
-    to_id bigint unsigned not null,
-    content text,
-    date datetime default now(),
-    foreign key (from_id) references users(id),
-    foreign key (to_id) references users(id)
-) comment 'сообщения';
+DROP TABLE IF EXISTS messages;
+CREATE TABLE messages
+(
+    from_id BIGINT UNSIGNED NOT NULL,
+    to_id   BIGINT UNSIGNED NOT NULL,
+    content TEXT,
+    date    DATETIME DEFAULT NOW(),
+    FOREIGN KEY (from_id) REFERENCES users (id),
+    FOREIGN KEY (to_id) REFERENCES users (id)
+) COMMENT 'сообщения';
 
 
 -- проверенные преподавателем практические задания студентов:
-drop table if exists teachers_practicals;
-create table teachers_practicals(
-    teacher_id bigint unsigned not null,
-    student_id bigint unsigned not null,
-    practical_id bigint unsigned not null,
-    rating tinyint(1) comment 'оценка',
-    date datetime default current_timestamp,
-    primary key (student_id, practical_id),
-    foreign key (teacher_id) references teachers(user_id),
-    foreign key (student_id) references students(user_id),
-    foreign key (practical_id) references practicals(lesson_id)
+DROP TABLE IF EXISTS teachers_practicals;
+CREATE TABLE teachers_practicals
+(
+    teacher_id   BIGINT UNSIGNED NOT NULL,
+    student_id   BIGINT UNSIGNED NOT NULL,
+    practical_id BIGINT UNSIGNED NOT NULL,
+    rating       TINYINT(1) COMMENT 'оценка',
+    date         DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (student_id, practical_id),
+    FOREIGN KEY (teacher_id) REFERENCES teachers (user_id),
+    FOREIGN KEY (student_id) REFERENCES students (user_id),
+    FOREIGN KEY (practical_id) REFERENCES practicals (lesson_id)
 );
 
 
